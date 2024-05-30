@@ -1,0 +1,56 @@
+.app {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.neck {
+  display: grid;
+  grid-template-columns: repeat(6, 25px);
+  grid-template-rows: repeat(5, 37px);
+  height: 185px;
+  width: 150px;
+}
+
+.fret {
+  border: .3px solid;
+  display: flex;
+  align-items: center;
+}
+
+.last-fret {
+  display: flex;
+  align-items: center;
+}
+
+.neck .fret:nth-child(6n+1) {
+  border-left: 1px solid;
+}
+
+.neck .fret:nth-child(6n+5) {
+  border-right: 1px solid;
+}
+
+.neck .fret:nth-child(-n+5) {
+  border-top: solid 5px;
+}
+
+.neck .last-fret:nth-child(6) {
+  border-top: solid 5px white;
+}
+
+.fretted {
+  background-color: black;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  position: relative;
+  right: 5.5px;
+}
+
+.emptycell {
+  background-color: aqua;
+  height: 10px;
+  width: 10px;
+}
