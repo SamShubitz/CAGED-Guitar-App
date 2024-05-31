@@ -1,16 +1,20 @@
-import Fret from "./Fret";
+import FretBoard from "./FretBoard";
 
-const ChordDiagram = ({ currentChord }) => {
-  const gridCells = new Array(30).fill(null);
+const ChordDiagram = ({ currentShape, setCurrentShape, selectedRoot }) => {
+  const isBarred = currentShape.name != selectedRoot;
+  //if (isBarred) {
+  //  const barredShape = currentShape.shape.map((shape) => shape + 6);
+  //  setCurrentShape({ ...currentShape, shape: barredShape });
 
-  const fretCells = gridCells.map((_, index) => {
-    const isFretted = currentChord.includes(index);
-    const className = (index + 1) % 6 === 0 ? "last-fret" : "fret";
-
-    return <Fret className={className} key={index} fretted={isFretted} />;
-  });
-
-  return <div className="neck">{fretCells}</div>;
+  return (
+    <div className="chord-diagram">
+      <FretBoard
+        currentShape={currentShape}
+        selectedRoot={selectedRoot}
+        isBarred={isBarred}
+      />
+    </div>
+  );
 };
 
 export default ChordDiagram;

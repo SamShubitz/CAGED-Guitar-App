@@ -1,16 +1,15 @@
 .app {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.neck {
+.fret-board {
   display: grid;
   grid-template-columns: repeat(6, 25px);
-  grid-template-rows: repeat(5, 37px);
-  height: 185px;
-  width: 150px;
+  grid-template-rows: repeat(6, 37px);
 }
 
 .fret {
@@ -19,28 +18,31 @@
   align-items: center;
 }
 
-.last-fret {
-  display: flex;
-  align-items: center;
-}
-
-.neck .fret:nth-child(6n+1) {
-  border-left: 1px solid;
-}
-
-.neck .fret:nth-child(6n+5) {
+.fret:nth-child(6n + 5) {
   border-right: 1px solid;
 }
 
-.neck .fret:nth-child(-n+5) {
-  border-top: solid 5px;
+.fret:nth-child(6n + 1) {
+  border-left: 1px solid;
 }
 
-.neck .last-fret:nth-child(6) {
-  border-top: solid 5px white;
+.fret:nth-child(n+6):nth-child(-n+12) {
+  border-top: 6px solid;
 }
 
-.fretted {
+.last-string {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+}
+
+.fret-board > span:nth-of-type(12) {
+  border-top: 6px solid white;
+}
+
+
+.fret-fret, .last-string-fret {
   background-color: black;
   border-radius: 50%;
   height: 10px;
@@ -49,8 +51,23 @@
   right: 5.5px;
 }
 
-.emptycell {
-  background-color: aqua;
-  height: 10px;
-  width: 10px;
+.open-fret {
+  background-color: white;
+  border: 1px solid black;
+  margin-top: 24px;
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+  position: relative;
+  right: 5.5px;
+}
+
+.barre-fret {
+  background-color: black;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  height: 8px;
+  min-width: 45px;
+  position: relative;
+  right: 45px;
 }

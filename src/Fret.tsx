@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Fret = ({ className, fretted }) => {
+const Fret = ({ className }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -9,7 +9,7 @@ const Fret = ({ className, fretted }) => {
 
   return (
     <span className={className} onClick={handleClick}>
-      {isClicked || fretted ? <div className="fretted" /> : null}
+      {isClicked && <div className={`${className}-fret`} />}
     </span>
   );
 };
