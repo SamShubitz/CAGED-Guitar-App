@@ -6,17 +6,13 @@ import { useState } from "react";
 
 function App() {
   const [currentShape, setCurrentShape] = useState({ name: "", shape: [] });
-  const [selectedRoot, setSelectedRoot] = useState("");
+  const [selectedRoot, setSelectedRoot] = useState("C");
 
   return (
     <div className="app">
-      <ButtonSection setCurrentShape={setCurrentShape} />
       <RootSelect setSelectedRoot={setSelectedRoot} />
-      <ChordDiagram
-        currentShape={currentShape}
-        setCurrentShape={setCurrentShape}
-        selectedRoot={selectedRoot}
-      />
+      <ButtonSection setCurrentShape={setCurrentShape} />
+      <ChordDiagram currentShape={currentShape} selectedRoot={selectedRoot} />
     </div>
   );
 }

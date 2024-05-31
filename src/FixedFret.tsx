@@ -1,9 +1,12 @@
-const Fret = ({ className, isFretted }) => {
+const FixedFret = ({ className, isFretted, isBarred, index }) => {
+  const fretClassName =
+    isBarred && index >= 8 && index <= 11 ? "barred-fret" : `${className}-fret`;
+
   return (
     <span className={className}>
-      {isFretted && <div className={`${className}-fret`} />}
+      {isFretted && <div className={fretClassName} />}
     </span>
   );
 };
 
-export default Fret;
+export default FixedFret;

@@ -6,6 +6,14 @@
   align-items: center;
 }
 
+.chord-diagram {
+  display: flex;
+}
+
+.barre-fret-indicator {
+  padding-top: 30px;
+}
+
 .fret-board {
   display: grid;
   grid-template-columns: repeat(6, 25px);
@@ -38,7 +46,7 @@
 }
 
 .fret-board > span:nth-of-type(12) {
-  border-top: 6px solid white;
+  border-top: 5px solid white;
 }
 
 
@@ -62,12 +70,12 @@
   right: 5.5px;
 }
 
-.barre-fret {
+.barred-fret {
   background-color: black;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  height: 8px;
-  min-width: 45px;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  height: 9px;
+  min-width: 48px;
   position: relative;
-  right: 45px;
+  right: 48px;
 }

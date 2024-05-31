@@ -1,18 +1,71 @@
 import FretBoard from "./FretBoard";
+import { useState, useEffect } from "react";
 
-const ChordDiagram = ({ currentShape, setCurrentShape, selectedRoot }) => {
+const ChordDiagram = ({ currentShape, selectedRoot }) => {
+  const [barredFret, setBarredFret] = useState("");
   const isBarred = currentShape.name != selectedRoot;
-  //if (isBarred) {
-  //  const barredShape = currentShape.shape.map((shape) => shape + 6);
-  //  setCurrentShape({ ...currentShape, shape: barredShape });
+  const barredFrets = [8, 9, 10, 11];
+
+  let finalShape = [];
+  if (currentShape.shape.length != 0) {
+    if (isBarred) {
+      const newFrets = currentShape.shape
+        .filter((fret) => fret >= 6)
+        .map((fret) => fret + 6);
+      const barredShape = Array.from(new Set([...barredFrets, ...newFrets]));
+      finalShape = barredShape;
+    } else {
+      finalShape = currentShape.shape;
+    }
+  }
+
+  useEffect(() => {
+    const calculateBarredFret = () => {
+      const barredFretValues = {
+        C: 0,
+        "C#/Db": 1,
+        D: 2,
+        "D#/Eb": 3,
+        E: 4,
+        F: 5,
+        "F#/Gb": 6,
+        G: 7,
+        "G#/Ab": 8,
+        A: 9,
+        "A#/Bb": 10,
+        B: 11,
+      };
+
+      const shape = currentShape.name;
+      let barredFret;
+
+      if (shape === "C") {
+        barredFret = barredFretValues[selectedRoot];
+      } else if (shape === "A") {
+        barredFret = barredFretValues[selectedRoot] + 3;
+      } else if (shape === "G") {
+        barredFret = barredFretValues[selectedRoot] + 5;
+      } else if (shape === "E") {
+        barredFret = barredFretValues[selectedRoot] + 8;
+      } else if (shape === "D") {
+        barredFret = barredFretValues[selectedRoot] + 10;
+      }
+
+      if (barredFret > 11) {
+        barredFret -= 12;
+      }
+      setBarredFret(barredFret);
+    };
+
+    calculateBarredFret();
+  }, [currentShape, selectedRoot]);
 
   return (
     <div className="chord-diagram">
-      <FretBoard
-        currentShape={currentShape}
-        selectedRoot={selectedRoot}
-        isBarred={isBarred}
-      />
+      <FretBoard finalShape={finalShape} isBarred={isBarred} />
+      {isBarred && barredFret && (
+        <p className="barre-fret-indicator">{`${barredFret}fr`}</p>
+      )}
     </div>
   );
 };

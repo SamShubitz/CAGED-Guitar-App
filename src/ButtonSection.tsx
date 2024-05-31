@@ -15,6 +15,7 @@ const ButtonSection = ({ setCurrentShape }) => {
 
   return (
     <div className="button-section">
+      <p>Select shape:</p>
       <button onClick={handleClick} value="C">
         C
       </button>
