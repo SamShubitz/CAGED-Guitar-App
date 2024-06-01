@@ -10,18 +10,53 @@
 
 p, label {
   font-family: 'karla', sans-serif;
-  color: #d4cd47;
+  color: #E0DBD8;
   font-size: 1.1rem;
 }
 
-.note-select-section {
-  width: 30rem;
+.name-display {
+  color:#F4CE14
+}
+
+.root-select-section {
   display: flex;
-  gap: 1rem;
+  gap: .8rem;
+}
+
+.button-section {
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
+  margin-top: 2rem;
+}
+
+.button-section-header {
+  margin-top: 2rem;
+  margin-bottom: -2rem;
 }
 
 .button-section > button {
-  width: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F4CE14;
+  margin-inline: .5rem;
+  margin-top: 1rem;
+  border: none;
+  border-bottom: 4px solid #c7a80f;
+  border-right: 5px solid #e9c410;
+  border-radius: 2rem;
+  color: #333b43;
+  height: 1.5rem;
+  width: 4rem;
+  text-decoration: none;
+  font-size: .7rem;
+  font-weight: bold;
+}
+
+.button-section > button:hover {
+    background-color: #dfbd10;
+    color: #E0DBD8;
 }
 
 .chord-diagram {
@@ -30,6 +65,7 @@ p, label {
 }
 
 .barre-fret-indicator {
+  color: #F4CE14;
   margin-top: 4.4rem;
   margin-left: -1.6rem;
   font-size: .97rem;
@@ -43,7 +79,7 @@ p, label {
 }
 
 .fret {
-  border: 0.3px solid #E0DBD8;
+  border: 0.3px solid #eae5e2;
   display: flex;
   align-items: center;
 }
@@ -84,8 +120,8 @@ p, label {
   border: 1px solid #E0DBD8;
   margin-top: 1.7rem;
   border-radius: 8px;
-  height: .8rem;
-  width: .8rem;
+  height: .7rem;
+  width: .7rem;
   position: relative;
   right: 8px;
 }

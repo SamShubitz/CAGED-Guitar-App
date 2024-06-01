@@ -5,6 +5,7 @@ const ChordDiagram = ({ currentShape, selectedRoot }) => {
   const [barredFret, setBarredFret] = useState("");
   const isBarred = currentShape.name != selectedRoot;
   const { shape, name } = currentShape;
+
   const barredFrets =
     name === "C"
       ? [11]

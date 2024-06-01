@@ -11,8 +11,10 @@ function App() {
   return (
     <div className="app">
       <RootSelect setSelectedRoot={setSelectedRoot} />
+      <p className="button-section-header">Select shape:</p>
       <ButtonSection setCurrentShape={setCurrentShape} />
       <ChordDiagram currentShape={currentShape} selectedRoot={selectedRoot} />
+      <p className="name-display">{currentShape.name}</p>
     </div>
   );
 }
