@@ -4,18 +4,26 @@ import { useState, useEffect } from "react";
 const ChordDiagram = ({ currentShape, selectedRoot }) => {
   const [barredFret, setBarredFret] = useState("");
   const isBarred = currentShape.name != selectedRoot;
-  const barredFrets = [8, 9, 10, 11];
+  const { shape, name } = currentShape;
+  const barredFrets =
+    name === "C"
+      ? [11]
+      : name === "D" || name === "G"
+      ? [10, 11]
+      : name === "A"
+      ? [9, 10, 11]
+      : [8, 9, 10, 11];
 
   let finalShape = [];
-  if (currentShape.shape.length != 0) {
+  if (shape.length != 0) {
     if (isBarred) {
-      const newFrets = currentShape.shape
+      const newFrets = shape
         .filter((fret) => fret >= 6)
         .map((fret) => fret + 6);
       const barredShape = Array.from(new Set([...barredFrets, ...newFrets]));
       finalShape = barredShape;
     } else {
-      finalShape = currentShape.shape;
+      finalShape = shape;
     }
   }
 

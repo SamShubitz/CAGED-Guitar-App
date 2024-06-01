@@ -19,8 +19,8 @@ const RootSelect = ({ setSelectedRoot }) => {
   };
 
   return (
-    <div note-select-section>
-      <label htmlFor="note-select">Select chord:</label>
+    <div className="note-select-section">
+      <label htmlFor="note-select">Select chord: </label>
       <select className="note-select" id="note-select" onChange={handleChange}>
         {notes.map((note, index) => (
           <option key={index} value={note}>
