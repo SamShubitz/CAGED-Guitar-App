@@ -21,7 +21,7 @@ const ChordDiagram = ({ currentShape, selectedRoot }) => {
       const newFrets = shape
         .filter((fret) => fret >= 6)
         .map((fret) => fret + 6);
-      const barredShape = Array.from(new Set([...barredFrets, ...newFrets]));
+      const barredShape = Array.from([...barredFrets, ...newFrets]);
       finalShape = barredShape;
     } else {
       finalShape = shape;

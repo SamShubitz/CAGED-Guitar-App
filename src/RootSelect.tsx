@@ -20,7 +20,7 @@ const RootSelect = ({ setSelectedRoot }) => {
 
   return (
     <div className="root-select-section">
-      <label htmlFor="root-select">Select chord: </label>
+      <label htmlFor="root-select">Select a chord: </label>
       <select className="root-select" id="root-select" onChange={handleChange}>
         {notes.map((note, index) => (
           <option key={index} value={note}>

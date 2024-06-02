@@ -1,15 +1,10 @@
-import { useState } from "react";
-
-const Fret = ({ className }) => {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
+const Fret = ({ className, isFretted, isBarred, index }) => {
+  const fretClassName =
+    isBarred && index >= 8 && index <= 11 ? "barred-fret" : `${className}-fret`;
 
   return (
-    <span className={className} onClick={handleClick}>
-      {isClicked && <div className={`${className}-fret`} />}
+    <span className={className}>
+      {isFretted && <div className={fretClassName} />}
     </span>
   );
 };

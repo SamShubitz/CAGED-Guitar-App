@@ -1,21 +1,85 @@
 .app {
-  background-color: #333b43;
   display: flex;
   height: 100vh;
+}
+
+.caged-diagram-interface {
+  flex-grow: 1;
+  background-color: #333b43;
+  display: flex;
   padding-inline: 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-p, label {
+.home-page {
+  flex-grow: 1;
+  background-color: #333b43;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-page-description {
+  width: 27rem;
+  line-height: 2rem;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  color:#F4CE14;
+}
+
+p, a, label {
   font-family: 'karla', sans-serif;
   color: #E0DBD8;
   font-size: 1.1rem;
 }
 
+a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: .8rem;
+  display: block;
+}
+
+a:hover {
+  color:#939199
+}
+
+.side-nav {
+  background-color: #282e34;
+  width: 12rem;
+  position: sticky;
+  left: 0px;
+  border-right: 1px solid #97999d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list > li {
+  padding-block: 1rem;
+  padding-right: 1rem;
+}
+
+.nav-header {
+  margin-top: 6rem;
+  text-align: center;
+  height: 5rem;
+}
+
 .name-display {
-  color:#F4CE14
+  color: #F4CE14;
+  height: 1rem;
 }
 
 .root-select-section {
@@ -35,7 +99,7 @@ p, label {
   margin-bottom: -2rem;
 }
 
-.button-section > button {
+button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,7 +108,7 @@ p, label {
   margin-top: 1rem;
   border: none;
   border-bottom: 4px solid #c7a80f;
-  border-right: 5px solid #e9c410;
+  border-right: 4px solid #e9c410;
   border-radius: 2rem;
   color: #333b43;
   height: 1.5rem;
@@ -54,14 +118,14 @@ p, label {
   font-weight: bold;
 }
 
-.button-section > button:hover {
+button:hover {
     background-color: #dfbd10;
     color: #E0DBD8;
 }
 
 .chord-diagram {
   display: flex;
-  width: 10rem;
+  width: 11rem;
 }
 
 .barre-fret-indicator {
@@ -79,7 +143,7 @@ p, label {
 }
 
 .fret {
-  border: 0.3px solid #eae5e2;
+  border: 0.3px solid #E0DBD8;
   display: flex;
   align-items: center;
 }

@@ -5,7 +5,6 @@ const ButtonSection = ({ setCurrentShape }) => {
     G: [2, 3, 4, 13, 18, 23],
     E: [0, 4, 5, 9, 13, 14],
     D: [2, 15, 17, 22],
-    clear: [],
   };
 
   const handleClick = (e) => {
@@ -29,9 +28,6 @@ const ButtonSection = ({ setCurrentShape }) => {
       </button>
       <button onClick={handleClick} value="D">
         D
-      </button>
-      <button onClick={handleClick} value="clear">
-        Clear
       </button>
     </div>
   );
