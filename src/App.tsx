@@ -1,8 +1,8 @@
 import "./App.css";
 import SideNav from "./SideNav";
-import HomePage from "./HomePage";
-import CAGEDInterface from "./CAGEDInterface";
-import CustomFretboard from "./CustomFretboard";
+import HomePage from "./Caged Section/HomePage";
+import CAGEDInterface from "./Caged Section/CAGEDInterface";
+import CustomInterface from "./Custom Section/CustomInterface";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/CAGED" element={<CAGEDInterface />} />
-        <Route path="/Customize" element={<CustomFretboard />} />
+        <Route path="/Customize" element={<CustomInterface />} />
       </Routes>
     </div>
   );

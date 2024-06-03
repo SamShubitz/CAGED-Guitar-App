@@ -1,4 +1,4 @@
-import FretBoard from "./FretBoard";
+import Fretboard from "./Fretboard";
 import { useState, useEffect } from "react";
 
 const ChordDiagram = ({ currentShape, selectedRoot }) => {
@@ -71,7 +71,7 @@ const ChordDiagram = ({ currentShape, selectedRoot }) => {
 
   return (
     <div className="chord-diagram">
-      <FretBoard finalShape={finalShape} isBarred={isBarred} />
+      <Fretboard finalShape={finalShape} isBarred={isBarred} />
       {isBarred && barredFret && (
         <p className="barre-fret-indicator">{`${barredFret}fr`}</p>
       )}

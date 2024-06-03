@@ -12,6 +12,7 @@ const FretBoard = ({ finalShape, isBarred }) => {
         isFretted={isFretted}
         isBarred={isBarred}
         index={index}
+        key={index}
       />
     );
   });

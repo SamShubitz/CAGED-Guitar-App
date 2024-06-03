@@ -125,7 +125,7 @@ button:hover {
 
 .chord-diagram {
   display: flex;
-  width: 11rem;
+  width: 12rem;
 }
 
 .barre-fret-indicator {
@@ -135,6 +135,34 @@ button:hover {
   font-size: .97rem;
   font-style: italic;
 }
+
+.custom-interface {
+  flex-grow: 1;
+  background-color: #333b43;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chord-name-input {
+  padding-top: 2rem;
+  margin-right: 2rem;
+  height: 3rem;
+}
+
+.chord-name-input > label {
+  font-size: 1rem;
+  margin-right: .3rem;
+  color:#F4CE14;
+}
+
+.chord-name-input > input {
+  width: 4.3rem;
+  background-color: #E0DBD8;
+  color: #333b43;
+}
+
 
 .fret-board {
   display: inline grid;
@@ -198,4 +226,30 @@ button:hover {
   min-width: 4.5rem;
   position: relative;
   right: 4.5rem;
+}
+
+.muted-fret {
+  position: relative;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.muted-fret::before,
+.muted-fret::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #E0DBD8;
+  top: 2.1rem;
+  right: .6rem;
+  transform-origin: center;
+}
+
+.muted-fret::before {
+  transform: rotate(45deg);
+}
+
+.muted-fret::after {
+  transform: rotate(-45deg);
 }
