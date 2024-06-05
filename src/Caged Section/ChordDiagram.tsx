@@ -1,6 +1,9 @@
 import Fretboard from "./Fretboard";
 import { useState, useEffect } from "react";
-
+//currentShape has name: "c" and shape: []
+//on click it has a populate shape
+//selected root is chord.name
+// currentshape is chord.barre and chord.shape
 const ChordDiagram = ({ currentShape, selectedRoot }) => {
   const [barredFret, setBarredFret] = useState("");
   const isBarred = currentShape.name != selectedRoot;
@@ -14,7 +17,7 @@ const ChordDiagram = ({ currentShape, selectedRoot }) => {
       : name === "A"
       ? [9, 10, 11]
       : [8, 9, 10, 11];
-
+  console.log(currentShape, selectedRoot);
   let finalShape = [];
   if (shape.length != 0) {
     if (isBarred) {

@@ -1,41 +1,90 @@
 import CustomFretboard from "./CustomFretboard";
-import Fretboard from "../Caged Section/Fretboard";
 import { useState } from "react";
 
 const CustomInterface = () => {
-  const [shape, setShape] = useState([]);
-  const [chordName, setChordName] = useState("");
+  const [chord, setChord] = useState({
+    name: "",
+    shape: [],
+    mutedFrets: [],
+    barre: "",
+    barreIndicator: "",
+  });
   const [progression, setProgression] = useState([]);
 
   const handleClear = () => {
-    setShape([]);
+    setChord({
+      name: "",
+      shape: [],
+      mutedFrets: [],
+      barre: "",
+      barreIndicator: "",
+    });
   };
 
-  const handleClick = (fretIndex, className) => {
-    setShape((shape) => {
-      if (className !== "open" && shape.includes(fretIndex)) {
-        return shape.filter((index) => index !== fretIndex);
-      } else {
-        return [...shape, fretIndex];
-      }
+  const handleSelect = (e) => {
+    const nextBarre = e.target.value;
+    setChord((prevChord) => ({ ...prevChord, barre: nextBarre }));
+  };
+
+  const handleClick = (fretIndex, className, updatedMuteIndex) => {
+    setChord((prevChord) => {
+      const isMuted = fretIndex < 6 && updatedMuteIndex === 2;
+      const newShape =
+        className !== "open" && prevChord.shape.includes(fretIndex)
+          ? prevChord.shape.filter((index) => index !== fretIndex)
+          : [...prevChord.shape, fretIndex];
+
+      const newMutedFrets = isMuted
+        ? [...prevChord.mutedFrets, fretIndex]
+        : prevChord.mutedFrets.filter((index) => index !== fretIndex);
+
+      return {
+        ...prevChord,
+        shape: newShape,
+        mutedFrets: newMutedFrets,
+      };
     });
   };
 
   const handleSave = (e) => {
     e.preventDefault();
-    const newChord = { name: chordName, shape: shape };
-    setProgression([...progression, newChord]);
+    setProgression((prevProgression) => [...prevProgression, chord]);
+    handleClear();
   };
 
   return (
     <div className="custom-interface">
-      <div className="button-section">
-        <form onSubmit={handleSave}>
-          <button type="submit">Save</button>
-        </form>
-        <button onClick={handleClear}>Clear</button>
-      </div>
-      <CustomFretboard shape={shape} handleClick={handleClick} />
+      <button onClick={handleClear}>Clear</button>
+      <label htmlFor="barre-select">Barre:</label>
+      <select
+        className="barre-select"
+        id="barre-select"
+        onChange={(e) => handleSelect(e)}
+      >
+        <option value=""></option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <label className="barre-fret-indicator" htmlFor="fret-indicator-input">
+        <input
+          className="fret-indicator-input"
+          id="fret-indicator-input"
+          type="text"
+          maxLength={2}
+          value={chord.barreIndicator}
+          onChange={(e) =>
+            setChord({ ...chord, barreIndicator: e.target.value })
+          }
+        />
+        fr
+      </label>
+      <CustomFretboard
+        chord={chord}
+        handleClick={handleClick}
+        customize={true}
+      />
       <div className="chord-name-input">
         <label htmlFor="chord-name">Chord Name: </label>
         <input
@@ -43,13 +92,19 @@ const CustomInterface = () => {
           id="chord-name"
           name="chord-name"
           className="chord-name"
-          onChange={(e) => setChordName(e.target.value)}
+          value={chord.name}
+          onChange={(e) =>
+            setChord((prevChord) => ({ ...prevChord, name: e.target.value }))
+          }
         />
       </div>
+      <form onSubmit={handleSave}>
+        <button type="submit">Save</button>
+      </form>
       <ul>
         {progression.map((chord, index) => (
           <li key={index}>
-            {chord.name}: <Fretboard finalShape={chord.shape} />
+            {chord.name} <CustomFretboard chord={chord} />
           </li>
         ))}
       </ul>
