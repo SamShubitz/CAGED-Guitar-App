@@ -1,4 +1,4 @@
-const NewRootSelect = ({ onChange }) => {
+const RootSelect = ({ handleNameChange }) => {
   const notes = [
     "C",
     "C#/Db",
@@ -14,15 +14,15 @@ const NewRootSelect = ({ onChange }) => {
     "B",
   ];
 
-  const handleSelect = (e) => {
-    const root = e.target.value;
-    onChange(root);
+  const handleChange = (e) => {
+    const chordName = e.target.value;
+    handleNameChange(chordName);
   };
 
   return (
     <div className="root-select-section">
       <label htmlFor="root-select">Select a chord: </label>
-      <select className="root-select" id="root-select" onChange={handleSelect}>
+      <select className="root-select" id="root-select" onChange={handleChange}>
         {notes.map((note, index) => (
           <option key={index} value={note}>
             {note}
@@ -33,4 +33,4 @@ const NewRootSelect = ({ onChange }) => {
   );
 };
 
-export default NewRootSelect;
+export default RootSelect;

@@ -1,4 +1,4 @@
-import CustomFretboard from "./CustomFretboard";
+import CustomFretboard from "../Fretboard";
 import { useState } from "react";
 
 const CustomInterface = () => {

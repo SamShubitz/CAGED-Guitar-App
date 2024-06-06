@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CustomFret = ({
+const Fret = ({
   className,
   isFretted,
   isBarred,
@@ -48,4 +48,4 @@ const CustomFret = ({
   );
 };
 
-export default CustomFret;
+export default Fret;

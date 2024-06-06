@@ -1,15 +1,7 @@
-const ButtonSection = ({ setCurrentShape }) => {
-  const shapes = {
-    C: [3, 5, 10, 14, 19],
-    A: [1, 5, 14, 15, 16],
-    G: [2, 3, 4, 13, 18, 23],
-    E: [0, 4, 5, 9, 13, 14],
-    D: [2, 15, 17, 22],
-  };
-
+const ButtonSection = ({ handleBarreChange }) => {
   const handleClick = (e) => {
-    const shapeName = e.target.value;
-    setCurrentShape({ name: shapeName, shape: shapes[shapeName] });
+    const barre = e.target.value;
+    handleBarreChange(barre);
   };
 
   return (
