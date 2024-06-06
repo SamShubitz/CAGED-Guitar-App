@@ -1,4 +1,4 @@
-import CustomFretboard from "../Fretboard";
+import Fretboard from "../Fretboard";
 import { useState } from "react";
 
 const CustomInterface = () => {
@@ -54,37 +54,60 @@ const CustomInterface = () => {
 
   return (
     <div className="custom-interface">
-      <button onClick={handleClear}>Clear</button>
-      <label htmlFor="barre-select">Barre:</label>
-      <select
-        className="barre-select"
-        id="barre-select"
-        onChange={(e) => handleSelect(e)}
+      <p
+        style={{
+          fontSize: ".85rem",
+          fontWeight: "bolder",
+          marginBottom: "1.5rem",
+        }}
       >
-        <option value=""></option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-      </select>
-      <label className="barre-fret-indicator" htmlFor="fret-indicator-input">
-        <input
-          className="fret-indicator-input"
-          id="fret-indicator-input"
-          type="text"
-          maxLength={2}
-          value={chord.barreIndicator}
-          onChange={(e) =>
-            setChord({ ...chord, barreIndicator: e.target.value })
-          }
-        />
-        fr
-      </label>
-      <CustomFretboard
-        chord={chord}
-        handleClick={handleClick}
-        customize={true}
-      />
+        CUSTOMIZE
+      </p>
+      <div className="custom-button-section">
+        <form className="save-form" onSubmit={handleSave}>
+          <button type="submit">Add chord</button>
+        </form>
+        <button className="clear-button" onClick={handleClear}>
+          Clear
+        </button>
+      </div>
+      <div className="custom-chord-diagram">
+        <div className="custom-fretboard">
+          <Fretboard chord={chord} handleClick={handleClick} customize={true} />
+        </div>
+        <div className="diagram-controls">
+          <label
+            className="barre-fret-indicator"
+            htmlFor="fret-indicator-input"
+          >
+            <input
+              className="fret-indicator-input"
+              id="fret-indicator-input"
+              type="text"
+              maxLength={2}
+              value={chord.barreIndicator}
+              onChange={(e) =>
+                setChord({ ...chord, barreIndicator: e.target.value })
+              }
+            />
+            fr
+          </label>
+          <label htmlFor="barre-select">
+            <select
+              className="barre-select"
+              id="barre-select"
+              onChange={(e) => handleSelect(e)}
+            >
+              <option value=""></option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+            <p className="barre-select-text">Barre</p>
+          </label>
+        </div>
+      </div>
       <div className="chord-name-input">
         <label htmlFor="chord-name">Chord Name: </label>
         <input
@@ -92,20 +115,16 @@ const CustomInterface = () => {
           id="chord-name"
           name="chord-name"
           className="chord-name"
+          required
           value={chord.name}
           onChange={(e) =>
             setChord((prevChord) => ({ ...prevChord, name: e.target.value }))
           }
         />
       </div>
-      <form onSubmit={handleSave}>
-        <button type="submit">Save</button>
-      </form>
       <ul>
         {progression.map((chord, index) => (
-          <li key={index}>
-            {chord.name} <CustomFretboard chord={chord} />
-          </li>
+          <li key={index}>{chord.name}</li>
         ))}
       </ul>
     </div>
