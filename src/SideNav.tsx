@@ -14,6 +14,7 @@ const SideNav = () => {
         <li>
           <Link to="/Customize">CUSTOMIZE</Link>
         </li>
+        <li className="progressions">PROGRESSIONS</li>
       </ul>
     </nav>
   );

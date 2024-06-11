@@ -1,6 +1,6 @@
 .app {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 h1, li {
@@ -12,26 +12,28 @@ li {
   list-style: none;
 }
 
-p, a, label {
+p, a, label, .progressions {
   font-family: 'karla', sans-serif;
   color: #E0DBD8;
   font-size: 1.1rem;
 }
 
-a {
+a, .progressions {
   text-decoration: none;
   font-weight: bold;
   font-size: .8rem;
   display: block;
 }
 
-a:hover {
-  color:#939199
+.progressions:hover, a:hover {
+  color:#939199;
+  cursor: pointer;
 }
 
 .side-nav {
   background-color: #282e34;
-  width: 12rem;
+  width: 180px;
+  flex-shrink: 0;
   position: sticky;
   left: 0px;
   border-right: 1px solid #4d5359;
@@ -95,6 +97,7 @@ a:hover {
   align-items: center;
   flex-flow: wrap;
   margin-top: 2rem;
+  z-index: 2;
 }
 
 .button-section-header {
@@ -122,13 +125,14 @@ button {
 }
 
 button:hover {
-    background-color: #dfbd10;
-    color: #E0DBD8;
+  background-color: #dfbd10;
+  color: #E0DBD8;
 }
 
 .chord-diagram {
   display: flex;
-  width: 10rem;
+  margin-left: 2rem;
+  width: 12rem;
 }
 
 .barre-fret-indicator {
@@ -145,23 +149,21 @@ button:hover {
   border-radius: 4px;
 }
 
-.custom-interface {
-  flex-grow: 1;
-  background-color: #333b43;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.chord-list-header {
+  font-size: 1rem;
+  align-self: flex-start;
+  margin-left: 5rem;
+  margin-bottom: -.2rem;
 }
 
-.custom-button-section {
+.chord-name-list {
+  align-self: flex-start;
+  margin-left: 5rem;
+  margin-right: 1rem;
   display: flex;
-  height: 4rem;
-  gap: .6rem;
-  align-items: flex-end;
-  margin-bottom: -.8rem;
-  margin-right: .7rem;
-  z-index: 1;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0rem;
 }
 
 .custom-chord-diagram {
@@ -170,7 +172,7 @@ button:hover {
 }
 
 .custom-chord-diagram > .custom-fretboard {
-  margin-left: 6rem;
+  margin-left: 6.5rem;
 }
 
 .diagram-controls {
@@ -187,14 +189,20 @@ button:hover {
   padding-bottom: .5rem;
 }
 
+.clear-button {
+  position: relative;
+  right: .6rem;
+  bottom: .3rem;
+}
+
 .barre-select {
   padding-top: .3rem;
+  margin-right: .5rem;
   border-radius: 4px;
 }
 
 .barre-select-text {
   display: inline;
-  margin-left: .5rem;
   font-size: .9rem;
 }
 
@@ -202,7 +210,7 @@ button:hover {
   padding-top: 2rem;
   padding-left: 1.2rem;
   margin-right: 2rem;
-  height: 3rem;
+  height: 2rem;
 }
 
 .chord-name-input > label {
@@ -222,6 +230,83 @@ button:hover {
 .save-form > button {
   padding-inline: .6rem;
   padding-block: .6rem;
+}
+
+.remove-button {
+  padding-left: .6rem;
+}
+
+.view-mode {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-progression-button {
+  padding-left: .6rem;
+  padding-block: .6rem;
+}
+
+.view-mode-button-section {
+  padding-block: 2rem;
+  gap: 1rem;
+  width: 8rem;
+  position: absolute;
+  top: 1rem;
+  left: 13rem;
+}
+
+.view-mode-button-section > li {
+  font-family: 'karla', sans-serif;
+  color: #E0DBD8;
+  font-size: .9rem;
+  font-weight: bolder;
+  padding-block: .5rem;
+}
+
+.save-progression-button {
+  font-family: 'karla', sans-serif;
+  color: #E0DBD8;
+  font-size: .9rem;
+  font-weight: bolder;
+  background-color: transparent;
+  border: none;
+  width: 9rem;
+  position: relative;
+  right: 1.25rem;
+  bottom: .8rem;
+}
+
+.save-progression-button:hover, .view-mode-button-section > li:hover {
+  color:#939199;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.view-mode > ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.progression-title-input {
+  background-color: transparent;
+  color: #F4CE14;
+  caret-color: #E0DBD8;
+  font-family: 'Playfair Display', serif;
+  border: none;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-top: 7rem;
+  margin-left: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.chord-list-container {
+  position: absolute;
+  top: 3rem;
+  left: 9rem;
 }
 
 .fret-board {

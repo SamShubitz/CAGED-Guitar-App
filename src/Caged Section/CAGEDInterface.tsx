@@ -1,4 +1,4 @@
-import CustomFretboard from "../Fretboard";
+import Fretboard from "../Fretboard";
 import RootSelect from "../RootSelect";
 import ButtonSection from "./ButtonSection";
 import { useState } from "react";
@@ -25,9 +25,9 @@ const CAGEDInterface = () => {
     setCurrentName(name);
   };
 
-  const getFinalShape = (name, barre) => {
+  const getFinalShape = (barre) => {
     let finalShape;
-    if (name !== barre) {
+    if (isBarred) {
       finalShape = shapes[barre]
         .filter((fret) => fret >= 6)
         .map((fret) => fret + 6);
@@ -74,7 +74,7 @@ const CAGEDInterface = () => {
   };
 
   const buildChord = () => {
-    const finalShape = getFinalShape(currentName, currentBarre);
+    const finalShape = getFinalShape(currentBarre);
     const barreIndicator = getBarreIndicator(currentName, currentBarre);
     const finalChord = {
       name: currentName,
@@ -94,7 +94,7 @@ const CAGEDInterface = () => {
       <p className="button-section-header">Select a shape:</p>
       <ButtonSection handleBarreChange={handleBarreChange} />
       <div className="chord-diagram">
-        <CustomFretboard chord={finalChord} caged={true} />
+        <Fretboard chord={finalChord} caged={true} />
         {isBarred && finalChord.barreIndicator && (
           <p className="barre-fret-indicator">{`${finalChord.barreIndicator}fr`}</p>
         )}

@@ -1,4 +1,5 @@
 import Fretboard from "../Fretboard";
+import ViewModeInterface from "../ViewModeInterface";
 import { useState } from "react";
 
 const CustomInterface = () => {
@@ -10,6 +11,11 @@ const CustomInterface = () => {
     barreIndicator: "",
   });
   const [progression, setProgression] = useState([]);
+  const [viewMode, setViewMode] = useState(false);
+  const displayProgression =
+    progression.length >= 17
+      ? [...progression.slice(0, 16), { name: "..." }]
+      : [...progression];
 
   const handleClear = () => {
     setChord({
@@ -19,6 +25,10 @@ const CustomInterface = () => {
       barre: "",
       barreIndicator: "",
     });
+  };
+
+  const handleChordClear = () => {
+    setProgression([...progression.slice(0, progression.length - 1)]);
   };
 
   const handleSelect = (e) => {
@@ -46,6 +56,10 @@ const CustomInterface = () => {
     });
   };
 
+  const toggleViewMode = () => {
+    setViewMode(!viewMode);
+  };
+
   const handleSave = (e) => {
     e.preventDefault();
     setProgression((prevProgression) => [...prevProgression, chord]);
@@ -53,80 +67,105 @@ const CustomInterface = () => {
   };
 
   return (
-    <div className="custom-interface">
-      <p
-        style={{
-          fontSize: ".85rem",
-          fontWeight: "bolder",
-          marginBottom: "1.5rem",
-        }}
-      >
-        CUSTOMIZE
-      </p>
-      <div className="custom-button-section">
-        <form className="save-form" onSubmit={handleSave}>
-          <button type="submit">Add chord</button>
-        </form>
-        <button className="clear-button" onClick={handleClear}>
-          Clear
-        </button>
-      </div>
-      <div className="custom-chord-diagram">
-        <div className="custom-fretboard">
-          <Fretboard chord={chord} handleClick={handleClick} customize={true} />
-        </div>
-        <div className="diagram-controls">
-          <label
-            className="barre-fret-indicator"
-            htmlFor="fret-indicator-input"
-          >
+    <div className="caged-diagram-interface">
+      {!viewMode ? (
+        <>
+          <div className="chord-list-container">
+            {progression.length !== 0 && (
+              <p className="chord-list-header">Chord List</p>
+            )}
+            <ul className="chord-name-list">
+              {displayProgression.map((chord, index) => (
+                <li key={index}>{chord.name}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="button-section">
+            <button
+              className="view-progression-button"
+              onClick={toggleViewMode}
+            >
+              View progression
+            </button>
+            <form id="save-form" className="save-form" onSubmit={handleSave}>
+              <button type="submit">Save chord</button>
+            </form>
+            <button className="remove-button" onClick={handleChordClear}>
+              Remove chord
+            </button>
+          </div>
+          <div className="custom-chord-diagram">
+            <div className="custom-fretboard">
+              <Fretboard
+                chord={chord}
+                handleClick={handleClick}
+                customize={true}
+              />
+            </div>
+            <div className="diagram-controls">
+              <label
+                className="barre-fret-indicator"
+                htmlFor="fret-indicator-input"
+              >
+                <input
+                  className="fret-indicator-input"
+                  id="fret-indicator-input"
+                  type="text"
+                  maxLength={2}
+                  value={chord.barreIndicator}
+                  onChange={(e) =>
+                    setChord({ ...chord, barreIndicator: e.target.value })
+                  }
+                />
+                fr
+              </label>
+              <label htmlFor="barre-select">
+                <select
+                  className="barre-select"
+                  id="barre-select"
+                  onChange={(e) => handleSelect(e)}
+                >
+                  <option value=""></option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+                <p className="barre-select-text">Barre</p>
+              </label>
+              <button className="clear-button" onClick={handleClear}>
+                Clear
+              </button>
+            </div>
+          </div>
+          <form className="chord-name-input">
+            <label htmlFor="chord-name">Chord Name: </label>
             <input
-              className="fret-indicator-input"
-              id="fret-indicator-input"
               type="text"
-              maxLength={2}
-              value={chord.barreIndicator}
+              id="chord-name"
+              name="chord-name"
+              className="chord-name"
+              maxLength={9}
+              required
+              form="save-form"
+              value={chord.name}
               onChange={(e) =>
-                setChord({ ...chord, barreIndicator: e.target.value })
+                setChord((prevChord) => ({
+                  ...prevChord,
+                  name: e.target.value,
+                }))
               }
             />
-            fr
-          </label>
-          <label htmlFor="barre-select">
-            <select
-              className="barre-select"
-              id="barre-select"
-              onChange={(e) => handleSelect(e)}
-            >
-              <option value=""></option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-            </select>
-            <p className="barre-select-text">Barre</p>
-          </label>
-        </div>
-      </div>
-      <div className="chord-name-input">
-        <label htmlFor="chord-name">Chord Name: </label>
-        <input
-          type="text"
-          id="chord-name"
-          name="chord-name"
-          className="chord-name"
-          required
-          value={chord.name}
-          onChange={(e) =>
-            setChord((prevChord) => ({ ...prevChord, name: e.target.value }))
-          }
+          </form>
+        </>
+      ) : (
+        <ViewModeInterface
+          progression={progression}
+          setProgression={setProgression}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
         />
-      </div>
-      <ul>
-        {progression.map((chord, index) => (
-          <li key={index}>{chord.name}</li>
-        ))}
-      </ul>
+      )}
     </div>
   );
 };
