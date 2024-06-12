@@ -77,6 +77,17 @@ a, .progressions {
   align-items: center;
 }
 
+.progressions-page {
+  flex-grow: 1;
+  background-color: #333b43;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 5rem;
+}
+
 .home-page-description {
   width: 27rem;
   line-height: 2rem;
@@ -168,11 +179,11 @@ button:hover {
 
 .custom-chord-diagram {
   display: flex;
-  justify-content: center;
+  margin-right: 4rem;
 }
 
 .custom-chord-diagram > .custom-fretboard {
-  margin-left: 6.5rem;
+  padding-left: .6rem;
 }
 
 .diagram-controls {
@@ -227,15 +238,6 @@ button:hover {
   border-radius: 4px;
 }
 
-.save-form > button {
-  padding-inline: .6rem;
-  padding-block: .6rem;
-}
-
-.remove-button {
-  padding-left: .6rem;
-}
-
 .view-mode {
   display: flex;
   flex-direction: column;
@@ -243,17 +245,12 @@ button:hover {
   align-items: center;
 }
 
-.view-progression-button {
-  padding-left: .6rem;
-  padding-block: .6rem;
-}
-
 .view-mode-button-section {
   padding-block: 2rem;
   gap: 1rem;
   width: 8rem;
   position: absolute;
-  top: 1rem;
+  top: 2.5rem;
   left: 13rem;
 }
 
@@ -265,7 +262,14 @@ button:hover {
   padding-block: .5rem;
 }
 
-.save-progression-button {
+.custom-button-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.view-mode-button {
   font-family: 'karla', sans-serif;
   color: #E0DBD8;
   font-size: .9rem;
@@ -278,7 +282,35 @@ button:hover {
   bottom: .8rem;
 }
 
-.save-progression-button:hover, .view-mode-button-section > li:hover {
+.progressions-page > .view-mode-button {
+  position: absolute;
+  top: 4rem;
+  left: 10rem;
+}
+
+.progressions-page > .view-mode-button:nth-child(2) {
+  position: absolute;
+  top: 6rem;
+  left: 12.3rem;
+}
+
+.custom-button {
+  font-family: 'karla', sans-serif;
+  color: #E0DBD8;
+  font-size: .9rem;
+  font-weight: bolder;
+  background-color: transparent;
+  border: none;
+  width: 9rem;
+}
+
+.custom-button:hover {
+  color:#F4CE14;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.view-mode-button:hover, .view-mode-button-section > li:hover {
   color:#939199;
   cursor: pointer;
   background-color: transparent;
@@ -287,7 +319,9 @@ button:hover {
 .view-mode > ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
 }
 
 .progression-title-input {
@@ -301,6 +335,21 @@ button:hover {
   margin-top: 7rem;
   margin-left: 2.2rem;
   margin-bottom: 1rem;
+}
+
+.progression-list {
+  align-self: flex-start;
+  text-align: left;
+  margin-bottom: 15rem;
+  height: 15rem;
+}
+
+.progression-list > li {
+  margin-bottom: 1rem;
+}
+
+.progression-list > li > a:hover {
+  color: #F4CE14;
 }
 
 .chord-list-container {

@@ -8,10 +8,11 @@ const ViewModeInterface = ({
   setViewMode,
 }) => {
   const [progressionTitle, setProgressionTitle] = useState("");
+  const [progressionList, setProgressionList] = useState([]);
   const userProgression = progression.map((chord, index) => (
     <li key={index}>
       <div className="chord-diagram">
-        <Fretboard chord={chord} className="display-fret-board" />
+        <Fretboard chord={chord} />
         {chord.barreIndicator && (
           <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
         )}
@@ -28,13 +29,19 @@ const ViewModeInterface = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userProgression = {
-      title: progressionTitle,
-      progression: [...progression],
-    };
-    localStorage.setItem("userProgression", JSON.stringify(userProgression));
+
+    if (progression.length !== 0) {
+      const userProgression = {
+        title: progressionTitle,
+        progression: [...progression],
+      };
+      const nextList = [...progressionList, userProgression];
+      setProgressionList([...nextList]);
+      localStorage.setItem(progressionTitle, JSON.stringify(nextList));
+      setProgression([]);
+    }
+
     toggleViewMode();
-    setProgression([]);
   };
 
   const handleChange = (e) => {
@@ -46,9 +53,11 @@ const ViewModeInterface = ({
       <div className="view-mode-button-section">
         <li onClick={toggleViewMode}>Go back</li>
         <form id="save-progression-form" onSubmit={(e) => handleSubmit(e)}>
-          <button className="save-progression-button" type="submit">
-            Save progression
-          </button>
+          {progression.length !== 0 && (
+            <button className="view-mode-button" type="submit">
+              Save progression
+            </button>
+          )}
         </form>
       </div>
       {progression.length !== 0 ? (

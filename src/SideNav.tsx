@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const SideNav = () => {
   return (
@@ -14,7 +15,9 @@ const SideNav = () => {
         <li>
           <Link to="/Customize">CUSTOMIZE</Link>
         </li>
-        <li className="progressions">PROGRESSIONS</li>
+        <li className="progressions">
+          <Link to="/Progressions">PROGRESSIONS</Link>
+        </li>
       </ul>
     </nav>
   );

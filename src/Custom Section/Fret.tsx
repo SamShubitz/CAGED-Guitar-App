@@ -12,7 +12,7 @@ const Fret = ({
   const [mutedIndex, setMutedIndex] = useState(0);
   const isMutedCycle = ["open", "open", "muted"];
 
-  const handleSpanClick = () => {
+  const handleFretClick = () => {
     if (!customize) return;
 
     const updatedIndex = (mutedIndex + 1) % 3;
@@ -28,7 +28,7 @@ const Fret = ({
 
   if (customize) {
     return (
-      <span className={className} onClick={handleSpanClick}>
+      <span className={className} onClick={handleFretClick}>
         {isFretted && <div className={`${finalClassName}-fret`} />}
       </span>
     );

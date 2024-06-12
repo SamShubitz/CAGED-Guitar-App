@@ -12,9 +12,10 @@ const CustomInterface = () => {
   });
   const [progression, setProgression] = useState([]);
   const [viewMode, setViewMode] = useState(false);
+
   const displayProgression =
-    progression.length >= 17
-      ? [...progression.slice(0, 16), { name: "..." }]
+    progression.length >= 12
+      ? [...progression.slice(0, 11), { name: "..." }]
       : [...progression];
 
   const handleClear = () => {
@@ -70,31 +71,33 @@ const CustomInterface = () => {
     <div className="caged-diagram-interface">
       {!viewMode ? (
         <>
-          <div className="chord-list-container">
-            {progression.length !== 0 && (
-              <p className="chord-list-header">Chord List</p>
-            )}
-            <ul className="chord-name-list">
-              {displayProgression.map((chord, index) => (
-                <li key={index}>{chord.name}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="button-section">
-            <button
-              className="view-progression-button"
-              onClick={toggleViewMode}
-            >
-              View progression
-            </button>
-            <form id="save-form" className="save-form" onSubmit={handleSave}>
-              <button type="submit">Save chord</button>
-            </form>
-            <button className="remove-button" onClick={handleChordClear}>
-              Remove chord
-            </button>
-          </div>
           <div className="custom-chord-diagram">
+            <div className="chord-list-container">
+              {progression.length !== 0 && (
+                <p className="chord-list-header">Chord List</p>
+              )}
+              <ul className="chord-name-list">
+                {displayProgression.map((chord, index) => (
+                  <li key={index}>{chord.name}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="custom-button-section">
+              <button className="custom-button view" onClick={toggleViewMode}>
+                View progression
+              </button>
+              <form id="save-form" className="save-form" onSubmit={handleSave}>
+                <button className="custom-button save" type="submit">
+                  Save chord
+                </button>
+              </form>
+              <button
+                className="custom-button remove"
+                onClick={handleChordClear}
+              >
+                Remove chord
+              </button>
+            </div>
             <div className="custom-fretboard">
               <Fretboard
                 chord={chord}
