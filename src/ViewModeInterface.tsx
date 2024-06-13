@@ -4,10 +4,11 @@ import { useState } from "react";
 const ViewModeInterface = ({
   progression,
   setProgression,
+  progressionTitle,
+  setProgressionTitle,
   viewMode,
   setViewMode,
 }) => {
-  const [progressionTitle, setProgressionTitle] = useState("");
   const [progressionList, setProgressionList] = useState([]);
   const userProgression = progression.map((chord, index) => (
     <li key={index}>
@@ -29,18 +30,17 @@ const ViewModeInterface = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const userProgression = {
+      title: progressionTitle,
+      progression: [...progression],
+    };
+    const nextList = [...progressionList, userProgression];
+    setProgressionList([...nextList]);
 
-    if (progression.length !== 0) {
-      const userProgression = {
-        title: progressionTitle,
-        progression: [...progression],
-      };
-      const nextList = [...progressionList, userProgression];
-      setProgressionList([...nextList]);
-      localStorage.setItem(progressionTitle, JSON.stringify(nextList));
-      setProgression([]);
-    }
+    localStorage.setItem(progressionTitle, JSON.stringify(nextList));
 
+    setProgression([]);
+    setProgressionTitle("");
     toggleViewMode();
   };
 

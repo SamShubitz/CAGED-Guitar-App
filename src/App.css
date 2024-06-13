@@ -218,6 +218,7 @@ button:hover {
 }
 
 .chord-name-input {
+  font-family: 'Playfair Display', serif;
   padding-top: 2rem;
   padding-left: 1.2rem;
   margin-right: 2rem;
@@ -231,6 +232,7 @@ button:hover {
 }
 
 .chord-name-input > input {
+  font-family: ;
   width: 4.3rem;
   background-color: #fcfaf9;
   padding-left: .2rem;
@@ -250,7 +252,7 @@ button:hover {
   gap: 1rem;
   width: 8rem;
   position: absolute;
-  top: 2.5rem;
+  top: 1.25rem;
   left: 13rem;
 }
 
@@ -282,15 +284,15 @@ button:hover {
   bottom: .8rem;
 }
 
-.progressions-page > .view-mode-button {
+.progressions-page > a > .view-mode-button {
   position: absolute;
-  top: 4rem;
-  left: 10rem;
+  top: 2.5rem;
+  left: 12.2rem;
 }
 
 .progressions-page > .view-mode-button:nth-child(2) {
   position: absolute;
-  top: 6rem;
+  top: 4.5rem;
   left: 12.3rem;
 }
 
@@ -338,14 +340,19 @@ button:hover {
 }
 
 .progression-list {
-  align-self: flex-start;
-  text-align: left;
-  margin-bottom: 15rem;
-  height: 15rem;
+  position: absolute;
+  padding-right: .5rem;
+  top: 24rem;
+  left: -.5rem;
+  animation: slideDown 0.2s ease-out;
 }
 
 .progression-list > li {
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
+}
+
+.progression-list > li > a {
+  font-size: .75rem;
 }
 
 .progression-list > li > a:hover {
@@ -414,12 +421,12 @@ button:hover {
 
 .barred-fret {
   background-color:#E0DBD8;
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
   height: .7rem;
-  min-width: 4.5rem;
+  min-width: 2.3rem;
   position: relative;
-  right: 4.5rem;
+  right: 2.3rem;
 }
 
 .muted-fret {
@@ -446,4 +453,15 @@ button:hover {
 
 .muted-fret::after {
   transform: rotate(-45deg);
+}
+
+@keyframes slideDown {
+  from {
+      transform: scaleY(0);
+      transform-origin: top;
+  }
+  to {
+      transform: scaleY(1);
+      transform-origin: top;
+  }
 }

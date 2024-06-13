@@ -1,7 +1,18 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import ProgressionsList from "./ProgressionsList";
 
 const SideNav = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
   return (
     <nav className="side-nav">
       <h1 className="nav-header">unCAGED</h1>
@@ -16,8 +27,13 @@ const SideNav = () => {
           <Link to="/Customize">CUSTOMIZE</Link>
         </li>
         <li className="progressions">
-          <Link to="/Progressions">PROGRESSIONS</Link>
+          <a onClick={toggleOpen}>PROGRESSIONS</a>
         </li>
+        {isOpen && (
+          <li>
+            <ProgressionsList />
+          </li>
+        )}
       </ul>
     </nav>
   );

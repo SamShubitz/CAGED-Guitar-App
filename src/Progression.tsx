@@ -1,32 +1,43 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Fretboard from "./Fretboard";
 
 const Progression = () => {
-  const [progression, setProgression] = useState([]);
-  const { userTitle } = useParams();
+  const [currentProgression, setCurrentProgression] = useState([]);
   const navigate = useNavigate();
+  const { userTitle } = useParams();
 
   useEffect(() => {
     const unparsedProgression = localStorage.getItem(userTitle);
-    const userProgression = JSON.parse(unparsedProgression);
-    userProgression && setProgression(userProgression);
-  }, []);
+    if (unparsedProgression) {
+      const userProgression = JSON.parse(unparsedProgression);
+      setCurrentProgression(userProgression);
+      console.log(userProgression);
+    }
+  }, [userTitle]);
 
   const handleDelete = () => {
-    const key = progression[0].title;
-    localStorage.removeItem(key);
-    setProgression([]);
+    if (currentProgression.length !== 0) {
+      const isConfirmed = window.confirm(
+        "Are you sure you want to delete this progression?"
+      );
+      if (isConfirmed) {
+        const key = currentProgression[0].title;
+        localStorage.removeItem(key);
+        setCurrentProgression([]);
+        navigate("/Progressions");
+      }
+    }
   };
 
-  const progressionTitle = progression.map((progression, index) => (
+  const progressionTitle = currentProgression.map((progression, index) => (
     <li key={index}>
       <h1>{progression.title}</h1>
     </li>
   ));
 
-  const progressionChords = progression.map((userProgression) =>
-    userProgression.progression.map((chord, index) => (
+  const progressionChords = currentProgression.map((progression) =>
+    progression.progression.map((chord, index) => (
       <li key={index}>
         <div className="chord-diagram">
           <Fretboard chord={chord} />
@@ -43,13 +54,20 @@ const Progression = () => {
 
   return (
     <div className="progressions-page">
-      <button className="view-mode-button" onClick={() => navigate(-1)}>
-        Go back
-      </button>
-      <button className="view-mode-button" onClick={handleDelete}>
-        Delete progression
-      </button>
-      <ul style={{ marginTop: "3rem" }}>{progressionTitle}</ul>
+      <Link
+        to="/Customize"
+        state={userTitle !== "Autumn Leaves" && currentProgression}
+      >
+        <button className="view-mode-button">Back to customize</button>
+      </Link>
+      {userTitle && (
+        <button className="view-mode-button" onClick={handleDelete}>
+          Delete progression
+        </button>
+      )}
+      <ul style={{ marginTop: "3rem", paddingRight: "1rem" }}>
+        {progressionTitle}
+      </ul>
       <div className="view-mode">
         <ul>{progressionChords}</ul>
       </div>

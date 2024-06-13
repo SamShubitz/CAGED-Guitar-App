@@ -35,7 +35,7 @@ const Fret = ({
   }
 
   const fretClassName =
-    isBarred && index >= 8 && index <= 11
+    isBarred && index >= 7 && index <= 11
       ? "barred-fret"
       : isMuted
       ? "muted-fret"

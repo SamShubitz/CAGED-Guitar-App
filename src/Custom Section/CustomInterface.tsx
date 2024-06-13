@@ -1,6 +1,7 @@
 import Fretboard from "../Fretboard";
 import ViewModeInterface from "../ViewModeInterface";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const CustomInterface = () => {
   const [chord, setChord] = useState({
@@ -12,6 +13,17 @@ const CustomInterface = () => {
   });
   const [progression, setProgression] = useState([]);
   const [viewMode, setViewMode] = useState(false);
+  const [progressionTitle, setProgressionTitle] = useState("");
+  let { state } = useLocation();
+
+  useEffect(() => {
+    if (state) {
+      const sentProgression = state[0].progression;
+      const sentTitle = state[0].title;
+      setProgression(sentProgression);
+      setProgressionTitle(sentTitle);
+    }
+  }, []);
 
   const displayProgression =
     progression.length >= 12
@@ -71,6 +83,9 @@ const CustomInterface = () => {
     <div className="caged-diagram-interface">
       {!viewMode ? (
         <>
+          <h1 style={{ fontFamily: "karla, sans-serif", fontSize: "1.5rem" }}>
+            {progressionTitle ? progressionTitle : "Untitled"}
+          </h1>
           <div className="custom-chord-diagram">
             <div className="chord-list-container">
               {progression.length !== 0 && (
@@ -129,6 +144,7 @@ const CustomInterface = () => {
                   onChange={(e) => handleSelect(e)}
                 >
                   <option value=""></option>
+                  <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5</option>
@@ -165,6 +181,8 @@ const CustomInterface = () => {
         <ViewModeInterface
           progression={progression}
           setProgression={setProgression}
+          progressionTitle={progressionTitle}
+          setProgressionTitle={setProgressionTitle}
           viewMode={viewMode}
           setViewMode={setViewMode}
         />
