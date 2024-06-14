@@ -43,7 +43,9 @@ const Progression = () => {
             <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
           )}
         </div>
-        <p className="progression-name-display">{chord.name}</p>
+        <p className="progression-name-display" style={{ marginRight: "1rem" }}>
+          {chord.name}
+        </p>
       </li>
     ))
   );

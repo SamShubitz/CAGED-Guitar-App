@@ -18,7 +18,10 @@ const ViewModeInterface = ({
           <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
         )}
       </div>
-      <p className="view-name-display" style={{ textAlign: "center" }}>
+      <p
+        className="view-name-display"
+        style={{ textAlign: "center", marginLeft: "1.2rem" }}
+      >
         {chord.name}
       </p>
     </li>

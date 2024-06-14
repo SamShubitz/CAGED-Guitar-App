@@ -462,7 +462,7 @@ button:hover {
 .working-progression-title {
   font-family: "karla", sans-serif;
   font-size: "1.5rem";
-  margin-bottom: -1rem;
+  margin-bottom: -.1rem;
 }
 
 .progression-title {
@@ -597,9 +597,17 @@ button:hover {
 
 @media screen and (max-width: 715px) {
 
+  * {
+    overflow: hidden-y;
+  }
+
   .view-mode-button-section {
     top: 3rem;
     left: 1rem;
+  }
+
+  .progression-title-input {
+    margin-top: 10rem;
   }
 
   .custom-button-section {
@@ -623,17 +631,23 @@ button:hover {
   }
 
   .chord-list-container {
-    top: 4.5rem;
+    position: absolute;
+    top: 34rem;
     left: 0;
   }
 
   .chord-list-container > p {
     margin-left: 1rem;
+    font-size: .9rem;
   }
 
   .chord-list-container > ul {
     padding-left: 0;
     margin-left: 1rem;
+  }
+
+  .chord-list-container > ul > li {
+    font-size: .8rem;
   }
 
   .view-mode > ul {
@@ -651,7 +665,7 @@ button:hover {
   .progressions-page > a > .view-mode-button {
     position: absolute;
     top: 4rem;
-    left: -.45rem;
+    left: -1rem;
     width: 10rem;
     font-size: .75rem;
   }
@@ -659,7 +673,7 @@ button:hover {
   .progressions-page > .view-mode-button:nth-child(2) {
     position: absolute;
     top: 5.5rem;
-    left: 0rem;
+    left: -.6rem;
     font-size: .75rem;
   }
 
