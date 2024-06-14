@@ -34,6 +34,22 @@ body, html {
   border-bottom: 1px solid #4d5359;
   display: none;
   z-index: 1;
+  justify-content: flex-end;
+}
+
+.header > .nav-header {
+  margin-right: 1.5rem;
+  margin-bottom: .5rem;
+  align-self: center;
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(-180px);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 .header-side-nav {
@@ -48,6 +64,8 @@ body, html {
   flex-direction: column;
   align-items: center;
   z-index: 1;
+  transform: translateX(-180px);
+  animation: slideOut 0.5s forwards;
 }
 
 .content {
@@ -60,7 +78,7 @@ body, html {
 
 .logo {
   width: 5rem;
-  margin-top: 4rem;
+  margin-top: 5rem;
 }
 
 h1, li {
@@ -115,6 +133,7 @@ a, .progressions {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
 }
 
 .home-page {
@@ -193,7 +212,14 @@ button:hover {
 .chord-diagram {
   display: flex;
   width: 12rem;
-  margin-left: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.caged-diagram-interface > .chord-diagram {
+  display: flex;
+  width: 12rem;
+  margin-left: 3rem;
 }
 
 .barre-fret-indicator {
@@ -334,11 +360,28 @@ button:hover {
   padding-block: .5rem;
 }
 
-.custom-button-section {
+.custom-button-section, .view, .add, .remove {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+}
+
+.custom-button-section {
+  padding-bottom: 1.3rem;
+}
+
+.view-mode-buttons {
+  font-family: 'karla', sans-serif;
+  color: #E0DBD8;
+  font-size: .9rem;
+  font-weight: bolder;
+  background-color: transparent;
+  border: none;
+  width: 9rem;
+  position: relative;
+  right: 1.25rem;
+  bottom: .8rem;
 }
 
 .view-mode-button {
@@ -414,6 +457,16 @@ button:hover {
   text-align: center;
   margin-top: 7rem;
   margin-bottom: 1rem;
+}
+
+.working-progression-title {
+  font-family: "karla", sans-serif;
+  font-size: "1.5rem";
+  margin-bottom: -1rem;
+}
+
+.progression-title {
+  margin-top: 5rem;
 }
 
 .progression-list {
@@ -543,6 +596,73 @@ button:hover {
 }
 
 @media screen and (max-width: 715px) {
+
+  .view-mode-button-section {
+    top: 3rem;
+    left: 1rem;
+  }
+
+  .custom-button-section {
+    position: absolute;
+    top: 5rem;
+    left: .8rem;
+  }
+
+  .custom-button-section, .view, .add, .remove {
+    margin: 0;
+    align-items: flex-start;
+    font-size: .7rem;
+  }
+
+  .custom-fretboard {
+    margin-left: 8rem;
+  }
+
+  .chord-name-input {
+    margin-left: 1rem;
+  }
+
+  .chord-list-container {
+    top: 4.5rem;
+    left: 0;
+  }
+
+  .chord-list-container > p {
+    margin-left: 1rem;
+  }
+
+  .chord-list-container > ul {
+    padding-left: 0;
+    margin-left: 1rem;
+  }
+
+  .view-mode > ul {
+    margin-right: 2.8rem;
+  }
+
+  .progressions-page {
+    margin: 0;
+  }
+
+  .progression-title {
+    margin-top: 7rem;
+  }
+
+  .progressions-page > a > .view-mode-button {
+    position: absolute;
+    top: 4rem;
+    left: -.45rem;
+    width: 10rem;
+    font-size: .75rem;
+  }
+
+  .progressions-page > .view-mode-button:nth-child(2) {
+    position: absolute;
+    top: 5.5rem;
+    left: 0rem;
+    font-size: .75rem;
+  }
+
   .side-nav {
     display: none;
   }

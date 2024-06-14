@@ -31,9 +31,7 @@ const Progression = () => {
   };
 
   const progressionTitle = currentProgression.map((progression, index) => (
-    <li key={index}>
-      <h1>{progression.title}</h1>
-    </li>
+    <li key={index}>{progression.title}</li>
   ));
 
   const progressionChords = currentProgression.map((progression) =>
@@ -60,7 +58,7 @@ const Progression = () => {
           Delete progression
         </button>
       )}
-      <ul style={{ marginTop: "3rem" }}>{progressionTitle}</ul>
+      <h1 className="progression-title">{progressionTitle}</h1>
       <div className="view-mode">
         <ul>{progressionChords}</ul>
       </div>

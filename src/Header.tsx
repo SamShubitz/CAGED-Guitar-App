@@ -19,6 +19,7 @@ const Header = () => {
     <>
       <nav className="header">
         <HamburgerIcon onClick={toggleMenu} />
+        <h1 className="nav-header">unCAGED</h1>
       </nav>
       {menuIsOpen && (
         <SideNav className={"header-side-nav"} toggleMenu={toggleMenu} />
