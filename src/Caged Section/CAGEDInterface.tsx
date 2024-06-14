@@ -99,7 +99,7 @@ const CAGEDInterface = () => {
           <p className="barre-fret-indicator">{`${finalChord.barreIndicator}fr`}</p>
         )}
       </div>
-      <p className="name-display">
+      <p className="caged-name-display">
         {finalChord.shape.length ? finalChord.barre : ""}
       </p>
     </div>

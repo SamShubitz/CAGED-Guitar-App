@@ -86,7 +86,7 @@ const CustomInterface = () => {
           <h1 style={{ fontFamily: "karla, sans-serif", fontSize: "1.5rem" }}>
             {progressionTitle ? progressionTitle : "Untitled"}
           </h1>
-          <div className="custom-chord-diagram">
+          <div className="customize-chord-diagram">
             <div className="chord-list-container">
               {progression.length !== 0 && (
                 <p className="chord-list-header">Chord List</p>
@@ -103,7 +103,7 @@ const CustomInterface = () => {
               </button>
               <form id="save-form" className="save-form" onSubmit={handleSave}>
                 <button className="custom-button save" type="submit">
-                  Save chord
+                  Add chord
                 </button>
               </form>
               <button

@@ -1,6 +1,66 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
 .app {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  background-color: #333b43;
+}
+
+.side-nav {
+  background-color: #282e34;
+  width: 180px;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-right: 1px solid #4d5359;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.header {
+  background-color: #282e34;
+  height: 4.5rem;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  border-bottom: 1px solid #4d5359;
+  display: none;
+  z-index: 1;
+}
+
+.header-side-nav {
+  background-color: #282e34;
+  width: 180px;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-right: 1px solid #4d5359;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #333b43;
+  margin-left: 180px;
+}
+
+.logo {
+  width: 5rem;
+  margin-top: 4rem;
 }
 
 h1, li {
@@ -30,33 +90,22 @@ a, .progressions {
   cursor: pointer;
 }
 
-.side-nav {
-  background-color: #282e34;
-  width: 180px;
-  flex-shrink: 0;
-  position: sticky;
-  left: 0px;
-  border-right: 1px solid #4d5359;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .nav-list {
   list-style: none;
-  margin: 0;
+  width: 8.4rem;
+  margin-left: 1rem;
+  margin-top: 0;
   padding: 0;
 }
 
 .nav-list > li {
   padding-block: 1rem;
-  padding-right: 1rem;
 }
 
 .nav-header {
-  margin-top: 6rem;
   text-align: center;
-  height: 5rem;
+  height: 3rem;
+  margin-top: 2rem;
 }
 
 .caged-diagram-interface {
@@ -89,13 +138,15 @@ a, .progressions {
 }
 
 .home-page-description {
-  width: 27rem;
+  max-width: 27rem;
   line-height: 2rem;
+  margin-inline: 1rem;
 }
 
 .name-display {
   color: #F4CE14;
   height: 1rem;
+  margin-right: 5rem;
 }
 
 .root-select-section {
@@ -105,15 +156,14 @@ a, .progressions {
 
 .button-section {
   display: flex;
-  align-items: center;
+  justify-content: center;
   flex-flow: wrap;
   margin-top: 2rem;
-  z-index: 2;
 }
 
 .button-section-header {
   margin-top: 2rem;
-  margin-bottom: -2rem;
+  margin-bottom: -1rem;
 }
 
 button {
@@ -142,14 +192,14 @@ button:hover {
 
 .chord-diagram {
   display: flex;
-  margin-left: 2rem;
   width: 12rem;
+  margin-left: 2rem;
 }
 
 .barre-fret-indicator {
   color: #F4CE14;
   margin-top: 4.4rem;
-  margin-left: -1.6rem;
+  margin-left: -1.5rem;
   font-size: .97rem;
   font-style: italic;
 }
@@ -158,6 +208,11 @@ button:hover {
   width: 1rem;
   margin-right: .3rem;
   border-radius: 4px;
+}
+
+.caged-name-display {
+  color: #F4CE14;
+  height: 1rem;
 }
 
 .chord-list-header {
@@ -177,13 +232,28 @@ button:hover {
   padding: 0rem;
 }
 
-.custom-chord-diagram {
-  display: flex;
-  margin-right: 4rem;
+.chord-name-list > li {
+  font-family: "karla", sans-serif;
+  font-size: .85rem;
 }
 
-.custom-chord-diagram > .custom-fretboard {
-  padding-left: .6rem;
+.custom-chord-diagram {
+  display: flex;
+}
+
+.customize-chord-diagram {
+  display: flex;
+  margin-right: 3rem;
+}
+
+.view-name-display {
+  color: #F4CE14;
+  height: 1rem;
+  margin-right: 1.5rem;
+}
+
+.progression-name-display {
+  color: #F4CE14
 }
 
 .diagram-controls {
@@ -287,7 +357,8 @@ button:hover {
 .progressions-page > a > .view-mode-button {
   position: absolute;
   top: 2.5rem;
-  left: 12.2rem;
+  left: 11.9rem;
+  width: 10rem;
 }
 
 .progressions-page > .view-mode-button:nth-child(2) {
@@ -321,9 +392,16 @@ button:hover {
 .view-mode > ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
+}
+
+.custom-progression {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 .progression-title-input {
@@ -335,15 +413,12 @@ button:hover {
   font-size: 2.2rem;
   text-align: center;
   margin-top: 7rem;
-  margin-left: 2.2rem;
   margin-bottom: 1rem;
 }
 
 .progression-list {
-  position: absolute;
-  padding-right: .5rem;
-  top: 24rem;
-  left: -.5rem;
+  margin-left: -2.2rem;
+  margin-top: -1rem;
   animation: slideDown 0.2s ease-out;
 }
 
@@ -453,6 +528,124 @@ button:hover {
 
 .muted-fret::after {
   transform: rotate(-45deg);
+}
+
+.hamburger-icon {
+  display: inline;
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+  z-index: 3;
+}
+
+.hamburger-icon:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 715px) {
+  .side-nav {
+    display: none;
+  }
+
+  .header-side-nav {
+    display: flex;
+  }
+
+  .header {
+    display: flex;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+  .custom-chord-diagram {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .caged-name-display {
+    margin-left: 1rem;
+  }
+
+  .fret-board {
+    grid-template-columns: repeat(6, 1.6rem);
+    grid-template-rows: repeat(6, 2.4rem);
+    margin-left: 1.5rem;
+  }
+
+  .barre-fret-indicator {
+    color: #F4CE14;
+    margin-top: 3.7rem;
+    margin-left: -1rem;
+    font-size: .8rem;
+    font-style: italic;
+  }
+
+  .fret {
+    border: .9px solid #E0DBD8;
+  }
+
+  .fret:nth-child(n+6):nth-child(-n+12) {
+    border-top: 9px solid #E0DBD8;
+  }
+
+  .fret-board > span:nth-of-type(12) {
+    border-top: 8.5px solid #333b43;;
+  }
+
+  .fret-fret, .last-string-fret {
+    background-color: #E0DBD8;
+    border-radius: 12px;
+    height: .8rem;
+    width: .8rem;
+    position: relative;
+    right: 6.9px;
+  }
+
+  .open-fret {
+    background-color:#333b43;
+    border: 1px solid #E0DBD8;
+    margin-top: 1.2rem;
+    border-radius: 8px;
+    height: .6rem;
+    width: .6rem;
+    position: relative;
+    right: 5px;
+  }
+
+  .barred-fret {
+    background-color:#E0DBD8;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    height: .6rem;
+    min-width: 2rem;
+    position: relative;
+    right: 2rem;
+  }
+
+  .muted-fret {
+    position: relative;
+    width: .8rem;
+  }
+
+  .muted-fret::before,
+  .muted-fret::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #E0DBD8;
+    top: 1.5rem;
+    right: .4rem;
+    transform-origin: center;
+  }
+
+  .name-display {
+    margin-right: 3rem;
+    font-size: .85rem;
+  }
+
 }
 
 @keyframes slideDown {

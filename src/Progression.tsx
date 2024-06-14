@@ -6,13 +6,13 @@ const Progression = () => {
   const [currentProgression, setCurrentProgression] = useState([]);
   const navigate = useNavigate();
   const { userTitle } = useParams();
+  const decodedTitle = decodeURIComponent(userTitle);
 
   useEffect(() => {
-    const unparsedProgression = localStorage.getItem(userTitle);
+    const unparsedProgression = localStorage.getItem(decodedTitle);
     if (unparsedProgression) {
       const userProgression = JSON.parse(unparsedProgression);
       setCurrentProgression(userProgression);
-      console.log(userProgression);
     }
   }, [userTitle]);
 
@@ -45,29 +45,22 @@ const Progression = () => {
             <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
           )}
         </div>
-        <p className="name-display" style={{ textAlign: "center" }}>
-          {chord.name}
-        </p>
+        <p className="progression-name-display">{chord.name}</p>
       </li>
     ))
   );
 
   return (
     <div className="progressions-page">
-      <Link
-        to="/Customize"
-        state={userTitle !== "Autumn Leaves" && currentProgression}
-      >
-        <button className="view-mode-button">Back to customize</button>
+      <Link to="/Customize" state={currentProgression}>
+        <button className="view-mode-button">Modify progression</button>
       </Link>
       {userTitle && (
         <button className="view-mode-button" onClick={handleDelete}>
           Delete progression
         </button>
       )}
-      <ul style={{ marginTop: "3rem", paddingRight: "1rem" }}>
-        {progressionTitle}
-      </ul>
+      <ul style={{ marginTop: "3rem" }}>{progressionTitle}</ul>
       <div className="view-mode">
         <ul>{progressionChords}</ul>
       </div>

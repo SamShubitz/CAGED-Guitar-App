@@ -12,13 +12,13 @@ const ViewModeInterface = ({
   const [progressionList, setProgressionList] = useState([]);
   const userProgression = progression.map((chord, index) => (
     <li key={index}>
-      <div className="chord-diagram">
+      <div className="custom-chord-diagram">
         <Fretboard chord={chord} />
         {chord.barreIndicator && (
           <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
         )}
       </div>
-      <p className="name-display" style={{ textAlign: "center" }}>
+      <p className="view-name-display" style={{ textAlign: "center" }}>
         {chord.name}
       </p>
     </li>
@@ -72,7 +72,7 @@ const ViewModeInterface = ({
       ) : (
         <p>No chords added yet</p>
       )}
-      <ul>{userProgression}</ul>
+      <ul className="custom-progression">{userProgression}</ul>
     </div>
   );
 };

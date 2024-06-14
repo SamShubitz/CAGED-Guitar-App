@@ -1,8 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ProgressionsList from "./ProgressionsList";
+import Logo from "./assets/Logo.jpeg";
+import HamburgerIcon from "./HamburgerIcon";
 
-const SideNav = () => {
+const SideNav = ({ className = "side-nav", toggleMenu = () => {} }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const toggleOpen = () => {
@@ -14,7 +16,11 @@ const SideNav = () => {
   }, [location]);
 
   return (
-    <nav className="side-nav">
+    <nav className={className}>
+      {className === "header-side-nav" && (
+        <HamburgerIcon onClick={toggleMenu} />
+      )}
+      <img className="logo" src={Logo} alt="logo" />
       <h1 className="nav-header">unCAGED</h1>
       <ul className="nav-list">
         <li>
