@@ -15,20 +15,20 @@ const CustomChordDiagram = ({
 }) => {
   return (
     <>
+      <div className="chord-list-container">
+        {progression.length !== 0 && (
+          <p className="chord-list-header">Chord List</p>
+        )}
+        <ul className="chord-name-list">
+          {displayProgression.map((chord, index) => (
+            <li key={index}>{chord.name}</li>
+          ))}
+        </ul>
+      </div>
       <h1 className="working-progression-title">
         {progressionTitle ? progressionTitle : "Untitled"}
       </h1>
       <div className="customize-chord-diagram">
-        <div className="chord-list-container">
-          {progression.length !== 0 && (
-            <p className="chord-list-header">Chord List</p>
-          )}
-          <ul className="chord-name-list">
-            {displayProgression.map((chord, index) => (
-              <li key={index}>{chord.name}</li>
-            ))}
-          </ul>
-        </div>
         <div className="custom-button-section">
           <button className="custom-button view" onClick={toggleViewMode}>
             View progression

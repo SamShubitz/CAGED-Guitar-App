@@ -241,17 +241,19 @@ button:hover {
   height: 1rem;
 }
 
+.chord-list-container {
+  margin-inline: 1rem;
+  margin-bottom: 2rem;
+  height: 0rem;
+}
+
 .chord-list-header {
   font-size: 1rem;
-  align-self: flex-start;
-  margin-left: 5rem;
-  margin-bottom: -.2rem;
 }
 
 .chord-name-list {
   align-self: flex-start;
-  margin-left: 5rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -463,6 +465,7 @@ button:hover {
   font-family: "karla", sans-serif;
   font-size: "1.5rem";
   margin-bottom: -.1rem;
+  padding-top: 5rem;
 }
 
 .progression-title {
@@ -485,12 +488,6 @@ button:hover {
 
 .progression-list > li > a:hover {
   color: #F4CE14;
-}
-
-.chord-list-container {
-  position: absolute;
-  top: 3rem;
-  left: 9rem;
 }
 
 .fret-board {
@@ -616,6 +613,12 @@ button:hover {
     left: .8rem;
   }
 
+  .customize-chord-diagram {
+    display: flex;
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+  }
+
   .custom-button-section, .view, .add, .remove {
     margin: 0;
     align-items: flex-start;
@@ -628,27 +631,15 @@ button:hover {
 
   .chord-name-input {
     margin-left: 1rem;
+    margin-top: -2rem;
   }
 
   .chord-list-container {
-    position: absolute;
-    top: 34rem;
-    left: 0;
+    margin-top: 8rem;
+    margin-bottom: 0rem;
+    margin-inline: 1rem;
   }
 
-  .chord-list-container > p {
-    margin-left: 1rem;
-    font-size: .9rem;
-  }
-
-  .chord-list-container > ul {
-    padding-left: 0;
-    margin-left: 1rem;
-  }
-
-  .chord-list-container > ul > li {
-    font-size: .8rem;
-  }
 
   .view-mode > ul {
     margin-right: 2.8rem;
@@ -675,6 +666,10 @@ button:hover {
     top: 5.5rem;
     left: -.6rem;
     font-size: .75rem;
+  }
+
+  .working-progression-title {
+    padding-top: 6rem;
   }
 
   .side-nav {
