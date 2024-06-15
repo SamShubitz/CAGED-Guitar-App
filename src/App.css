@@ -264,6 +264,12 @@ button:hover {
   font-size: .85rem;
 }
 
+.empty-text {
+  font-family: "karla", sans-serif;
+  font-size: .85rem;
+  color:#F4CE14;
+}
+
 .custom-chord-diagram {
   display: flex;
 }
@@ -594,7 +600,7 @@ button:hover {
 @media screen and (max-width: 715px) {
 
   * {
-    overflow: hidden-y;
+    box-sizing: border-box;
   }
 
   .view-mode-button-section {
@@ -654,7 +660,7 @@ button:hover {
   }
 
   .chord-name-list > li {
-    font-size: .75rem;
+    font-size: .85rem;
   }
 
 

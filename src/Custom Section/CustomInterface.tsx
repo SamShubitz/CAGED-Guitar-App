@@ -1,6 +1,6 @@
 import CustomChordDiagram from "../CustomChordDiagram";
 import ViewModeInterface from "../ViewModeInterface";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 
 const CustomInterface = () => {
@@ -16,6 +16,11 @@ const CustomInterface = () => {
   const [progressionTitle, setProgressionTitle] = useState("");
   let { state } = useLocation();
 
+  const displayProgression =
+    progression.length >= 12
+      ? [...progression.slice(0, 11), { name: "..." }]
+      : [...progression];
+
   useEffect(() => {
     if (state) {
       const sentProgression = state[0].progression;
@@ -24,11 +29,6 @@ const CustomInterface = () => {
       setProgressionTitle(sentTitle);
     }
   }, []);
-
-  const displayProgression =
-    progression.length >= 12
-      ? [...progression.slice(0, 11), { name: "..." }]
-      : [...progression];
 
   const handleClear = () => {
     setChord({

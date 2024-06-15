@@ -16,14 +16,16 @@ const CustomChordDiagram = ({
   return (
     <>
       <div className="chord-list-container">
-        {progression.length !== 0 && (
-          <p className="chord-list-header">Chord List</p>
+        <p className="chord-list-header">Chord List</p>
+        {progression.length !== 0 ? (
+          <ul className="chord-name-list">
+            {displayProgression.map((chord, index) => (
+              <li key={index}>{chord.name}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="empty-text">&#8230;</p>
         )}
-        <ul className="chord-name-list">
-          {displayProgression.map((chord, index) => (
-            <li key={index}>{chord.name}</li>
-          ))}
-        </ul>
       </div>
       <h1 className="working-progression-title">
         {progressionTitle ? progressionTitle : "Untitled"}
@@ -33,14 +35,14 @@ const CustomChordDiagram = ({
           <button className="custom-button view" onClick={toggleViewMode}>
             View progression
           </button>
+          <button className="custom-button remove" onClick={handleChordClear}>
+            Remove chord
+          </button>
           <form id="save-form" className="save-form" onSubmit={handleSave}>
             <button className="custom-button add" type="submit">
               Add chord
             </button>
           </form>
-          <button className="custom-button remove" onClick={handleChordClear}>
-            Remove chord
-          </button>
         </div>
         <div className="custom-fretboard">
           <Fretboard chord={chord} handleClick={handleClick} customize={true} />
