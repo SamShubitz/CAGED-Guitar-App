@@ -68,6 +68,7 @@ const ViewModeInterface = ({
           className="progression-title-input"
           placeholder="Untitled"
           form="save-progression-form"
+          maxLength={35}
           required
           onChange={(e) => handleChange(e)}
           value={progressionTitle}

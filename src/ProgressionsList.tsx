@@ -80,7 +80,7 @@ const ProgressionsList = () => {
   const titleList = progressionTitles.map((title, index) => {
     const safeTitle = encodeURIComponent(title);
     return (
-      <li key={index}>
+      <li className="side-nav-list" key={index}>
         <Link to={`Progressions/${safeTitle}`}>{title}</Link>
       </li>
     );
