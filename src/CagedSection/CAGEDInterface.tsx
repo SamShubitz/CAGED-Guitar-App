@@ -1,6 +1,6 @@
-import Fretboard from "../Fretboard";
-import RootSelect from "../RootSelect";
-import ButtonSection from "./ButtonSection";
+import Fretboard from "../Common/Fretboard.tsx";
+import RootSelect from "./RootSelect.tsx";
+import ButtonSection from "./ButtonSection.tsx";
 import { useState } from "react";
 import { Name, CagedBarre } from "../types.ts";
 

@@ -1,5 +1,5 @@
-import Fretboard from "./Fretboard";
-import { CustomDiagramProps } from "./types.ts";
+import Fretboard from "../Common/Fretboard.tsx";
+import { CustomDiagramProps } from "../types.ts";
 
 const CustomChordDiagram = ({
   chord,

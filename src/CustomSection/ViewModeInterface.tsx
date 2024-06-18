@@ -1,5 +1,5 @@
-import Fretboard from "./Fretboard";
-import { ViewModeProps, ProgressionType } from "./types.ts";
+import Fretboard from "../Common/Fretboard.tsx";
+import { ViewModeProps, ProgressionType } from "../types.ts";
 import { useState } from "react";
 
 const ViewModeInterface = ({

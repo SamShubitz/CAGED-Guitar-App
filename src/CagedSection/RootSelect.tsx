@@ -1,4 +1,4 @@
-import { Name, RootSelectProps } from "./types.ts";
+import { Name, RootSelectProps } from "../types.ts";
 
 const RootSelect = ({ handleNameChange }: RootSelectProps) => {
   const notes = [

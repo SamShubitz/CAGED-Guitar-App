@@ -1,6 +1,6 @@
 import { Chord, CustomBarre, ClassNameType } from "../types.ts";
-import CustomChordDiagram from "../CustomChordDiagram";
-import ViewModeInterface from "../ViewModeInterface";
+import CustomChordDiagram from "./CustomChordDiagram.tsx";
+import ViewModeInterface from "./ViewModeInterface.tsx";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 

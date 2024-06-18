@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ProgressionsList from "./ProgressionsList";
-import Logo from "./assets/Logo.jpeg";
+import ProgressionsList from "../Common/ProgressionsList";
+import Logo from "../assets/Logo.jpeg";
 import HamburgerIcon from "./HamburgerIcon";
 
 const SideNav = ({ className = "side-nav", toggleMenu = () => {} }) => {

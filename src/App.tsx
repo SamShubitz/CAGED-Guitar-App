@@ -1,11 +1,11 @@
 import "./App.css";
-import Header from "./Header";
-import SideNav from "./SideNav";
-import HomePage from "./Caged Section/HomePage";
-import CAGEDInterface from "./Caged Section/CAGEDInterface";
-import CustomInterface from "./Custom Section/CustomInterface";
-import Progression from "./Progression";
-import ProgressionTemplate from "./ProgressionTemplate";
+import Header from "./Common/Header";
+import SideNav from "./Common/SideNav";
+import HomePage from "./CagedSection/HomePage";
+import CAGEDInterface from "./CagedSection/CAGEDInterface";
+import CustomInterface from "./CustomSection/CustomInterface";
+import Progression from "./ProgressionsSection/Progression";
+import ProgressionTemplate from "./ProgressionsSection/ProgressionTemplate";
 import { Route, Routes } from "react-router-dom";
 
 function App() {

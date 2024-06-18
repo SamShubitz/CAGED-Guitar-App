@@ -1,5 +1,5 @@
-import Fret from "./Custom Section/Fret";
-import { FretboardProps, BarreShape } from "./types.ts";
+import Fret from "./Fret.tsx";
+import { FretboardProps, BarreShape } from "../types.ts";
 
 const Fretboard = ({
   chord,

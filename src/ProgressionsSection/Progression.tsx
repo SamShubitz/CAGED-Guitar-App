@@ -1,7 +1,7 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Fretboard from "./Fretboard";
-import { ProgressionType } from "./types.ts";
+import Fretboard from "../Common/Fretboard.tsx";
+import { ProgressionType } from "../types.ts";
 
 const Progression = () => {
   const [currentProgression, setCurrentProgression] = useState<
