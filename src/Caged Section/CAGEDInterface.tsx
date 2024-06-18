@@ -2,10 +2,11 @@ import Fretboard from "../Fretboard";
 import RootSelect from "../RootSelect";
 import ButtonSection from "./ButtonSection";
 import { useState } from "react";
+import { Name, CagedBarre } from "../types.ts";
 
 const CAGEDInterface = () => {
-  const [currentName, setCurrentName] = useState("C");
-  const [currentBarre, setCurrentBarre] = useState("");
+  const [currentName, setCurrentName] = useState<Name>("C");
+  const [currentBarre, setCurrentBarre] = useState<CagedBarre>("");
   const isBarred = currentName !== currentBarre;
 
   const shapes = {
@@ -17,15 +18,15 @@ const CAGEDInterface = () => {
     D: [2, 15, 17, 22],
   };
 
-  const handleBarreChange = (barre) => {
+  const handleBarreChange = (barre: CagedBarre) => {
     setCurrentBarre(barre);
   };
 
-  const handleNameChange = (name) => {
+  const handleNameChange = (name: Name) => {
     setCurrentName(name);
   };
 
-  const getFinalShape = (barre) => {
+  const getFinalShape = (barre: CagedBarre) => {
     let finalShape;
     if (isBarred) {
       finalShape = shapes[barre]
@@ -37,7 +38,7 @@ const CAGEDInterface = () => {
     return finalShape;
   };
 
-  const getBarreIndicator = (name, barre) => {
+  const getBarreIndicator = (name: Name, barre: CagedBarre) => {
     const barredFretValues = {
       C: 0,
       "C#/Db": 1,
@@ -53,7 +54,7 @@ const CAGEDInterface = () => {
       B: 11,
     };
 
-    let barredFret;
+    let barredFret: number | "";
 
     if (barre === "C") {
       barredFret = barredFretValues[name];
@@ -65,12 +66,16 @@ const CAGEDInterface = () => {
       barredFret = barredFretValues[name] + 8;
     } else if (barre === "D") {
       barredFret = barredFretValues[name] + 10;
+    } else {
+      barredFret = "";
     }
 
-    if (barredFret > 11) {
+    if (barredFret !== "" && barredFret > 11) {
       barredFret -= 12;
     }
-    return barredFret;
+    const barredFretString = barredFret === "" ? "" : String(barredFret);
+
+    return barredFretString;
   };
 
   const buildChord = () => {

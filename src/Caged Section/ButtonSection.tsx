@@ -1,7 +1,13 @@
-const ButtonSection = ({ handleBarreChange }) => {
-  const handleClick = (e) => {
-    const barre = e.target.value;
-    handleBarreChange(barre);
+import { CagedBarre } from "../types.ts";
+
+const ButtonSection = ({
+  handleBarreChange,
+}: {
+  handleBarreChange: (barre: CagedBarre) => void;
+}) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const barre = e.currentTarget.value;
+    handleBarreChange(barre as CagedBarre);
   };
 
   return (

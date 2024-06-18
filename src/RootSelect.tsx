@@ -1,4 +1,6 @@
-const RootSelect = ({ handleNameChange }) => {
+import { Name, RootSelectProps } from "./types.ts";
+
+const RootSelect = ({ handleNameChange }: RootSelectProps) => {
   const notes = [
     "C",
     "C#/Db",
@@ -14,8 +16,8 @@ const RootSelect = ({ handleNameChange }) => {
     "B",
   ];
 
-  const handleChange = (e) => {
-    const chordName = e.target.value;
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const chordName = e.target.value as Name;
     handleNameChange(chordName);
   };
 

@@ -1,4 +1,8 @@
-const RootSelect = ({ setSelectedRoot }) => {
+const RootSelect = ({
+  setSelectedRoot,
+}: {
+  setSelectedRoot: (value: string) => void;
+}) => {
   const notes = [
     "C",
     "C#/Db",
@@ -14,7 +18,7 @@ const RootSelect = ({ setSelectedRoot }) => {
     "B",
   ];
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRoot(e.target.value);
   };
 

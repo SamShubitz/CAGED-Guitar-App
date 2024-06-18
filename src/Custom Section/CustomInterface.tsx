@@ -1,25 +1,29 @@
+import { Chord, CustomBarre, ClassNameType } from "../types.ts";
 import CustomChordDiagram from "../CustomChordDiagram";
 import ViewModeInterface from "../ViewModeInterface";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const CustomInterface = () => {
-  const [chord, setChord] = useState({
+  const [chord, setChord] = useState<Chord>({
     name: "",
     shape: [],
     mutedFrets: [],
     barre: "",
     barreIndicator: "",
   });
-  const [progression, setProgression] = useState([]);
-  const [viewMode, setViewMode] = useState(false);
-  const [progressionTitle, setProgressionTitle] = useState("");
+  const [progression, setProgression] = useState<Chord[]>([]);
+  const [viewMode, setViewMode] = useState<boolean>(false);
+  const [progressionTitle, setProgressionTitle] = useState<string>("");
   let { state } = useLocation();
 
-  const displayProgression =
+  const displayProgression = (
     progression.length >= 12
       ? [...progression.slice(0, 11), { name: "..." }]
-      : [...progression];
+      : [...progression]
+  ).map((chord) => {
+    return chord.name;
+  });
 
   useEffect(() => {
     if (state) {
@@ -44,13 +48,17 @@ const CustomInterface = () => {
     setProgression([...progression.slice(0, progression.length - 1)]);
   };
 
-  const handleSelect = (e) => {
-    const nextBarre = e.target.value;
-    setChord((prevChord) => ({ ...prevChord, barre: nextBarre }));
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const nextBarre = e.target.value as CustomBarre;
+    setChord({ ...chord, barre: nextBarre });
   };
 
-  const handleClick = (fretIndex, className, updatedMuteIndex) => {
-    setChord((prevChord) => {
+  const handleClick = (
+    fretIndex: number,
+    className: ClassNameType,
+    updatedMuteIndex: number
+  ) => {
+    setChord((prevChord: Chord) => {
       const isMuted = fretIndex < 6 && updatedMuteIndex === 2;
       const newShape =
         className !== "open" && prevChord.shape.includes(fretIndex)
@@ -73,7 +81,7 @@ const CustomInterface = () => {
     setViewMode(!viewMode);
   };
 
-  const handleSave = (e) => {
+  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setProgression((prevProgression) => [...prevProgression, chord]);
     handleClear();

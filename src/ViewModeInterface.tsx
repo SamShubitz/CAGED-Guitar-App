@@ -1,4 +1,5 @@
 import Fretboard from "./Fretboard";
+import { ViewModeProps, ProgressionType } from "./types.ts";
 import { useState } from "react";
 
 const ViewModeInterface = ({
@@ -8,8 +9,8 @@ const ViewModeInterface = ({
   setProgressionTitle,
   viewMode,
   setViewMode,
-}) => {
-  const [progressionList, setProgressionList] = useState([]);
+}: ViewModeProps) => {
+  const [progressionList, setProgressionList] = useState<ProgressionType[]>([]);
   const userProgression = progression.map((chord, index) => (
     <li key={index}>
       <div className="custom-chord-diagram">
@@ -18,12 +19,7 @@ const ViewModeInterface = ({
           <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
         )}
       </div>
-      <p
-        className="view-name-display"
-        style={{ textAlign: "center", marginLeft: "1.2rem" }}
-      >
-        {chord.name}
-      </p>
+      <p className="view-name-display">{chord.name}</p>
     </li>
   ));
 
@@ -31,7 +27,7 @@ const ViewModeInterface = ({
     setViewMode(!viewMode);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userProgression = {
       title: progressionTitle,
@@ -47,7 +43,7 @@ const ViewModeInterface = ({
     toggleViewMode();
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProgressionTitle(e.target.value);
   };
 

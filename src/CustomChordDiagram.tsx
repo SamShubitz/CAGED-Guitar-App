@@ -1,4 +1,5 @@
 import Fretboard from "./Fretboard";
+import { CustomDiagramProps } from "./types.ts";
 
 const CustomChordDiagram = ({
   chord,
@@ -12,19 +13,19 @@ const CustomChordDiagram = ({
   handleChordClear,
   handleClear,
   handleClick,
-}) => {
+}: CustomDiagramProps) => {
   return (
     <>
       <div className="chord-list-container">
         <p className="chord-list-header">Chord List</p>
         {progression.length !== 0 ? (
           <ul className="chord-name-list">
-            {displayProgression.map((chord, index) => (
-              <li key={index}>{chord.name}</li>
+            {displayProgression.map((name, index) => (
+              <li key={index}>{name}</li>
             ))}
           </ul>
         ) : (
-          <p className="empty-text">&#8230;</p>
+          <p className="empty-text">Empty</p>
         )}
       </div>
       <h1 className="working-progression-title">
@@ -71,11 +72,11 @@ const CustomChordDiagram = ({
               onChange={(e) => handleSelect(e)}
             >
               <option value=""></option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+              <option value={6}>6</option>
             </select>
             <p className="barre-select-text">Barre</p>
           </label>
@@ -96,10 +97,10 @@ const CustomChordDiagram = ({
           form="save-form"
           value={chord.name}
           onChange={(e) =>
-            setChord((prevChord) => ({
-              ...prevChord,
+            setChord({
+              ...chord,
               name: e.target.value,
-            }))
+            })
           }
         />
       </form>

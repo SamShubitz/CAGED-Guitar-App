@@ -66,7 +66,7 @@ const exampleProgression = [
 ];
 
 const ProgressionsList = () => {
-  const [progressionTitles, setProgressionTitles] = useState([]);
+  const [progressionTitles, setProgressionTitles] = useState<string[]>([]);
 
   useEffect(() => {
     const title = exampleProgression[0].title;

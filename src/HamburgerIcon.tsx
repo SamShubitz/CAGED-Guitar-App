@@ -1,4 +1,4 @@
-const HamburgerIcon = ({ onClick }) => {
+const HamburgerIcon = ({ onClick }: { onClick: () => void }) => {
   return (
     <svg
       className="hamburger-icon"

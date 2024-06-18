@@ -15,6 +15,7 @@ body, html {
   background-color: #282e34;
   width: 180px;
   min-height: 100%;
+  max-height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
@@ -22,6 +23,7 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: scroll;
   z-index: 1;
 }
 
@@ -43,6 +45,15 @@ body, html {
   align-self: center;
 }
 
+@keyframes slideOut {
+  from {
+    transform: translateX(-180px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 .header-side-nav {
   background-color: #282e34;
   width: 180px;
@@ -57,15 +68,6 @@ body, html {
   z-index: 1;
   transform: translateX(-180px);
   animation: slideOut 0.5s forwards;
-}
-
-@keyframes slideOut {
-  from {
-    transform: translateX(-180px);
-  }
-  to {
-    transform: translateX(0);
-  }
 }
 
 .content {
@@ -284,6 +286,7 @@ button:hover {
   color: #F4CE14;
   height: 1rem;
   margin-right: 1.5rem;
+  text-align: center;
 }
 
 .progression-name-display {
@@ -336,7 +339,6 @@ button:hover {
 }
 
 .chord-name-input > input {
-  font-family: ;
   width: 4.3rem;
   background-color: #fcfaf9;
   padding-left: .2rem;
@@ -611,6 +613,11 @@ button:hover {
     left: 1rem;
   }
 
+  .view-name-display {
+    margin-right: 0;
+    font-size: 1rem;
+  }
+
   .progression-title-input {
     margin-top: 10rem;
     width: 90%
@@ -769,8 +776,8 @@ button:hover {
     border: 1px solid #E0DBD8;
     margin-top: 1.2rem;
     border-radius: 8px;
-    height: .6rem;
-    width: .6rem;
+    height: .7rem;
+    width: .7rem;
     position: relative;
     right: 5px;
   }

@@ -1,12 +1,15 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Fretboard from "./Fretboard";
+import { ProgressionType } from "./types.ts";
 
 const Progression = () => {
-  const [currentProgression, setCurrentProgression] = useState([]);
+  const [currentProgression, setCurrentProgression] = useState<
+    ProgressionType[]
+  >([]);
   const navigate = useNavigate();
   const { userTitle } = useParams();
-  const decodedTitle = decodeURIComponent(userTitle);
+  const decodedTitle = decodeURIComponent(userTitle ?? "");
 
   useEffect(() => {
     const unparsedProgression = localStorage.getItem(decodedTitle);

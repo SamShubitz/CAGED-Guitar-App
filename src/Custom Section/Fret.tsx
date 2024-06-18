@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ClassNameType, FretProps } from "../types.ts";
 
 const Fret = ({
   className,
@@ -8,7 +9,7 @@ const Fret = ({
   index,
   handleClick,
   customize,
-}) => {
+}: FretProps) => {
   const [mutedIndex, setMutedIndex] = useState(0);
   const isMutedCycle = ["open", "open", "muted"];
 
@@ -23,8 +24,8 @@ const Fret = ({
   const finalClassName = isBarred
     ? "barred"
     : className === "open"
-    ? isMutedCycle[mutedIndex]
-    : className;
+    ? (isMutedCycle[mutedIndex] as ClassNameType)
+    : (className as ClassNameType);
 
   if (customize) {
     return (
