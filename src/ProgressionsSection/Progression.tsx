@@ -9,7 +9,9 @@ const Progression = () => {
   >([]);
   const navigate = useNavigate();
   const { userTitle } = useParams();
-  const decodedTitle = decodeURIComponent(userTitle ?? "");
+  const keyPrefix = "CAGED-";
+  const decodedTitle = decodeURIComponent(`${keyPrefix}${userTitle}` ?? "");
+  console.log(decodedTitle);
 
   useEffect(() => {
     const unparsedProgression = localStorage.getItem(decodedTitle);

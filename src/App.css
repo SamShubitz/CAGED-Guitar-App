@@ -622,14 +622,14 @@ button:hover {
   }
 
   .custom-button-section {
-   padding-top: 1rem;
+    padding-top: 4.5rem;
   }
 
   .custom-button-section, .add, .remove {
     margin: 0;
     align-items: flex-end;
     font-size: .75rem;
-    margin-right: -.4rem;
+    margin-right: -.3rem;
     margin-top: .5rem;
   }
 
