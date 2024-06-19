@@ -36,7 +36,7 @@ const ViewModeInterface = ({
     const nextList = [...progressionList, userProgression];
     setProgressionList([...nextList]);
 
-    localStorage.setItem(progressionTitle, JSON.stringify(nextList));
+    localStorage.setItem(`CAGED-${progressionTitle}`, JSON.stringify(nextList));
 
     setProgression([]);
     setProgressionTitle("");

@@ -67,14 +67,20 @@ const exampleProgression = [
 
 const ProgressionsList = () => {
   const [progressionTitles, setProgressionTitles] = useState<string[]>([]);
+  const keyPrefix = "CAGED-";
 
   useEffect(() => {
     const title = exampleProgression[0].title;
     const defaultProgression = JSON.stringify([...exampleProgression]);
-    if (Object.keys(localStorage).length === 0) {
-      localStorage.setItem(title, defaultProgression);
+    if (!Object.keys(localStorage).some((key) => key.startsWith(keyPrefix))) {
+      localStorage.setItem(`${keyPrefix}${title}`, defaultProgression);
     }
-    setProgressionTitles([...Object.keys(localStorage)]);
+
+    const strippedTitles: string[] = Object.keys(localStorage)
+      .filter((key) => key.startsWith(keyPrefix))
+      .map((key) => key.slice(keyPrefix.length));
+
+    setProgressionTitles(strippedTitles);
   }, []);
 
   const titleList = progressionTitles.map((title, index) => {
