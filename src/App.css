@@ -622,7 +622,7 @@ button:hover {
   }
 
   .custom-button-section {
-    padding-top: 4.5rem;
+    padding-top: 5rem;
   }
 
   .custom-button-section, .add, .remove {
@@ -630,7 +630,8 @@ button:hover {
     align-items: flex-end;
     font-size: .75rem;
     margin-right: -.3rem;
-    margin-top: .5rem;
+    margin-top: 1rem;
+    margin-block: .5rem;
   }
 
   .diagram-controls {

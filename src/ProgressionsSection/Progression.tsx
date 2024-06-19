@@ -27,7 +27,7 @@ const Progression = () => {
         "Are you sure you want to delete this progression?"
       );
       if (isConfirmed) {
-        const key = currentProgression[0].title;
+        const key = `${keyPrefix}${currentProgression[0].title}`;
         localStorage.removeItem(key);
         setCurrentProgression([]);
         navigate("/Progressions");
