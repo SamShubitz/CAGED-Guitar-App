@@ -4,14 +4,13 @@ import Fretboard from "../Common/Fretboard.tsx";
 import { ProgressionType } from "../types.ts";
 
 const Progression = () => {
-  const [currentProgression, setCurrentProgression] = useState<
-    ProgressionType[]
-  >([]);
+  const [currentProgression, setCurrentProgression] = useState<ProgressionType>(
+    { title: "", progression: [] }
+  );
   const navigate = useNavigate();
   const { userTitle } = useParams();
   const keyPrefix = "CAGED-";
   const decodedTitle = decodeURIComponent(`${keyPrefix}${userTitle}` ?? "");
-  console.log(decodedTitle);
 
   useEffect(() => {
     const unparsedProgression = localStorage.getItem(decodedTitle);
@@ -22,38 +21,38 @@ const Progression = () => {
   }, [userTitle]);
 
   const handleDelete = () => {
-    if (currentProgression.length !== 0) {
+    if (currentProgression) {
       const isConfirmed = window.confirm(
         "Are you sure you want to delete this progression?"
       );
       if (isConfirmed) {
-        const key = `${keyPrefix}${currentProgression[0].title}`;
+        const key = `${keyPrefix}${currentProgression.title}`;
         localStorage.removeItem(key);
-        setCurrentProgression([]);
+        setCurrentProgression({ title: "", progression: [] });
         navigate("/Progressions");
       }
     }
   };
 
-  const progressionTitle = currentProgression.map((progression, index) => (
-    <li key={index}>{progression.title}</li>
-  ));
-
-  const progressionChords = currentProgression.map((progression) =>
-    progression.progression.map((chord, index) => (
-      <li key={index}>
-        <div className="chord-diagram">
-          <Fretboard chord={chord} />
-          {chord.barreIndicator && (
-            <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
-          )}
-        </div>
-        <p className="progression-name-display" style={{ marginRight: "1rem" }}>
-          {chord.name}
-        </p>
-      </li>
-    ))
-  );
+  const progressionChords =
+    currentProgression.progression.length !== 0
+      ? currentProgression.progression.map((chord, index) => (
+          <li key={index}>
+            <div className="chord-diagram">
+              <Fretboard chord={chord} />
+              {chord.barreIndicator && (
+                <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
+              )}
+            </div>
+            <p
+              className="progression-name-display"
+              style={{ marginRight: "1rem" }}
+            >
+              {chord.name}
+            </p>
+          </li>
+        ))
+      : [];
 
   return (
     <div className="progressions-page">
@@ -65,10 +64,14 @@ const Progression = () => {
           Delete progression
         </button>
       )}
-      <h1 className="progression-title">{progressionTitle}</h1>
-      <div className="view-mode">
-        <ul>{progressionChords}</ul>
-      </div>
+      {currentProgression && (
+        <>
+          <h1 className="progression-title">{currentProgression.title}</h1>
+          <div className="view-mode">
+            <ul>{progressionChords}</ul>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -9,7 +9,7 @@ export interface Chord {
 export interface CustomDiagramProps {
     chord: Chord;
     setChord: (chord: Chord) => void;
-    progression: Chord[];
+    chordList: Chord[];
     progressionTitle: string;
     displayProgression: string[];
     toggleViewMode: () => void;
@@ -25,8 +25,8 @@ export interface CustomDiagramProps {
 }
 
 export interface ViewModeProps {
-    progression: Chord[];
-    setProgression: (chordList: Chord[]) => void;
+    chordList: Chord[];
+    setChordList: (chordList: Chord[]) => void;
     progressionTitle: string;
     setProgressionTitle: (title: string) => void;
     viewMode: boolean;

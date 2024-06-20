@@ -4,7 +4,7 @@ import { CustomDiagramProps } from "../types.ts";
 const CustomChordDiagram = ({
   chord,
   setChord,
-  progression,
+  chordList,
   progressionTitle,
   displayProgression,
   toggleViewMode,
@@ -18,7 +18,7 @@ const CustomChordDiagram = ({
     <>
       <div className="chord-list-container">
         <p className="chord-list-header">Chord List</p>
-        {progression.length !== 0 ? (
+        {chordList.length !== 0 ? (
           <ul className="chord-name-list">
             {displayProgression.map((name, index) => (
               <li key={index}>{name}</li>

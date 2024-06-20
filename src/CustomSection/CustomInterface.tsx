@@ -12,24 +12,24 @@ const CustomInterface = () => {
     barre: "",
     barreIndicator: "",
   });
-  const [progression, setProgression] = useState<Chord[]>([]);
+  const [chordList, setChordList] = useState<Chord[]>([]);
   const [viewMode, setViewMode] = useState<boolean>(false);
   const [progressionTitle, setProgressionTitle] = useState<string>("");
   let { state } = useLocation();
 
   const displayProgression = (
-    progression.length >= 12
-      ? [...progression.slice(0, 11), { name: "..." }]
-      : [...progression]
+    chordList.length >= 12
+      ? [...chordList.slice(0, 11), { name: "..." }]
+      : [...chordList]
   ).map((chord) => {
     return chord.name;
   });
 
   useEffect(() => {
     if (state) {
-      const sentProgression = state[0].progression;
-      const sentTitle = state[0].title;
-      setProgression(sentProgression);
+      const sentProgression = state.progression;
+      const sentTitle = state.title;
+      setChordList(sentProgression);
       setProgressionTitle(sentTitle);
     }
   }, []);
@@ -45,7 +45,7 @@ const CustomInterface = () => {
   };
 
   const handleChordClear = () => {
-    setProgression([...progression.slice(0, progression.length - 1)]);
+    setChordList([...chordList.slice(0, chordList.length - 1)]);
   };
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -83,7 +83,7 @@ const CustomInterface = () => {
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setProgression((prevProgression) => [...prevProgression, chord]);
+    setChordList([...chordList, chord]);
     handleClear();
   };
 
@@ -93,7 +93,7 @@ const CustomInterface = () => {
         <CustomChordDiagram
           chord={chord}
           setChord={setChord}
-          progression={progression}
+          chordList={chordList}
           progressionTitle={progressionTitle}
           displayProgression={displayProgression}
           toggleViewMode={toggleViewMode}
@@ -105,8 +105,8 @@ const CustomInterface = () => {
         />
       ) : (
         <ViewModeInterface
-          progression={progression}
-          setProgression={setProgression}
+          chordList={chordList}
+          setChordList={setChordList}
           progressionTitle={progressionTitle}
           setProgressionTitle={setProgressionTitle}
           viewMode={viewMode}

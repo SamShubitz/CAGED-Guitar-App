@@ -1,17 +1,15 @@
 import Fretboard from "../Common/Fretboard.tsx";
-import { ViewModeProps, ProgressionType } from "../types.ts";
-import { useState } from "react";
+import { ViewModeProps } from "../types.ts";
 
 const ViewModeInterface = ({
-  progression,
-  setProgression,
+  chordList,
+  setChordList,
   progressionTitle,
   setProgressionTitle,
   viewMode,
   setViewMode,
 }: ViewModeProps) => {
-  const [progressionList, setProgressionList] = useState<ProgressionType[]>([]);
-  const userProgression = progression.map((chord, index) => (
+  const userProgression = chordList.map((chord, index) => (
     <li key={index}>
       <div className="custom-chord-diagram">
         <Fretboard chord={chord} />
@@ -31,14 +29,15 @@ const ViewModeInterface = ({
     e.preventDefault();
     const userProgression = {
       title: progressionTitle,
-      progression: [...progression],
+      progression: [...chordList],
     };
-    const nextList = [...progressionList, userProgression];
-    setProgressionList([...nextList]);
 
-    localStorage.setItem(`CAGED-${progressionTitle}`, JSON.stringify(nextList));
+    localStorage.setItem(
+      `CAGED-${userProgression.title}`,
+      JSON.stringify(userProgression)
+    );
 
-    setProgression([]);
+    setChordList([]);
     setProgressionTitle("");
     toggleViewMode();
   };
@@ -52,14 +51,14 @@ const ViewModeInterface = ({
       <div className="view-mode-button-section">
         <li onClick={toggleViewMode}>Go back</li>
         <form id="save-progression-form" onSubmit={(e) => handleSubmit(e)}>
-          {progression.length !== 0 && (
+          {chordList.length !== 0 && (
             <button className="view-mode-button" type="submit">
               Save progression
             </button>
           )}
         </form>
       </div>
-      {progression.length !== 0 ? (
+      {chordList.length !== 0 ? (
         <input
           className="progression-title-input"
           placeholder="Untitled"
