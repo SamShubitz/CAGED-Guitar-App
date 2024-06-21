@@ -251,7 +251,7 @@ button:hover {
 
 .chord-list-container {
   height: 1rem;
-  width: 90%;
+  width: 60%;
 }
 
 .chord-list-header {
@@ -622,7 +622,7 @@ button:hover {
   }
 
   .custom-button-section {
-    padding-top: 5rem;
+    padding-top: 3rem;
   }
 
   .custom-button-section, .add, .remove {
@@ -630,8 +630,7 @@ button:hover {
     align-items: flex-end;
     font-size: .75rem;
     margin-right: -.3rem;
-    margin-top: 1rem;
-    margin-block: .5rem;
+    margin-top: .5rem;
   }
 
   .diagram-controls {
@@ -640,10 +639,6 @@ button:hover {
 
   .chord-name-input {
     margin-left: 1rem;
-  }
-
-  .chord-list-container {
-    margin-bottom: 3rem;
   }
 
   .chord-list-header {
