@@ -239,7 +239,7 @@ button:hover {
 }
 
 .fret-indicator-input {
-  width: 1rem;
+  width: 2rem;
   margin-right: .3rem;
   border-radius: 4px;
 }
@@ -250,7 +250,6 @@ button:hover {
 }
 
 .chord-list-container {
-  height: 1rem;
   width: 60%;
 }
 
@@ -331,10 +330,9 @@ button:hover {
 
 .chord-name-input {
   font-family: 'Playfair Display', serif;
-  padding-top: 2rem;
+  padding-top: 2.3rem;
   padding-left: 1.2rem;
-  margin-right: 2rem;
-  height: 2rem;
+  margin-right: 1rem;
 }
 
 .chord-name-input > label {
@@ -465,7 +463,6 @@ button:hover {
   font-family: "karla", sans-serif;
   font-size: "1.5rem";
   margin-bottom: -.1rem;
-  padding-top: 5rem;
   margin-inline: 1rem;
   text-align: center;
 }

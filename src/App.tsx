@@ -20,6 +20,7 @@ function App() {
           <Route path="Customize" element={<CustomInterface />} />
           <Route path="Progressions" element={<ProgressionTemplate />} />
           <Route path="Progressions/:userTitle" element={<Progression />} />
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </div>
     </div>
