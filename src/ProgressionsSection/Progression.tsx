@@ -5,7 +5,7 @@ import { ProgressionType } from "../types.ts";
 
 const Progression = () => {
   const [currentProgression, setCurrentProgression] = useState<ProgressionType>(
-    { title: "", progression: [] }
+    { title: "", chordList: [] }
   );
   const navigate = useNavigate();
   const { userTitle } = useParams();
@@ -28,15 +28,15 @@ const Progression = () => {
       if (isConfirmed) {
         const key = `${keyPrefix}${currentProgression.title}`;
         localStorage.removeItem(key);
-        setCurrentProgression({ title: "", progression: [] });
+        setCurrentProgression({ title: "", chordList: [] });
         navigate("/Progressions");
       }
     }
   };
 
   const progressionChords =
-    currentProgression.progression.length !== 0
-      ? currentProgression.progression.map((chord, index) => (
+    currentProgression.chordList.length !== 0
+      ? currentProgression.chordList.map((chord, index) => (
           <li key={index}>
             <div className="chord-diagram">
               <Fretboard chord={chord} />

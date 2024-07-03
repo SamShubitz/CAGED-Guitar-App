@@ -27,7 +27,7 @@ const CustomInterface = () => {
 
   useEffect(() => {
     if (state) {
-      const sentProgression = state.progression;
+      const sentProgression = state.chordList;
       const sentTitle = state.title;
       setChordList(sentProgression);
       setProgressionTitle(sentTitle);

@@ -60,7 +60,7 @@ export interface FretboardProps {
 
 export interface ProgressionType {
     title: string;
-    progression: Chord[];
+    chordList: Chord[];
 }
 
   export interface RootSelectProps {

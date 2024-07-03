@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const exampleProgression = {
   title: "Autumn Leaves",
-  progression: [
+  chordList: [
     {
       name: "Cm7",
       shape: [24, 1, 1, 26, 27, 28, 5, 5],

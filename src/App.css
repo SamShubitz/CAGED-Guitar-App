@@ -251,6 +251,8 @@ button:hover {
 
 .chord-list-container {
   width: 60%;
+  height: 4rem;
+  margin-bottom: 2rem;
 }
 
 .chord-list-header {

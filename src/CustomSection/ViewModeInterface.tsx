@@ -29,7 +29,7 @@ const ViewModeInterface = ({
     e.preventDefault();
     const userProgression = {
       title: progressionTitle,
-      progression: [...chordList],
+      chordList: [...chordList],
     };
 
     localStorage.setItem(
