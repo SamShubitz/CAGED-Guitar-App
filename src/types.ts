@@ -59,6 +59,7 @@ export interface FretboardProps {
 }
 
 export interface ProgressionType {
+    id?: number;
     title: string;
     chordList: Chord[];
 }

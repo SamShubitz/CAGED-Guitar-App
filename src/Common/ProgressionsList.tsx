@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { ProgressionType } from "../types";
+import axios from "axios";
 
-const exampleProgression = {
+const exampleProgression: ProgressionType = {
   title: "Autumn Leaves",
   chordList: [
     {
@@ -65,20 +67,41 @@ const exampleProgression = {
 
 const ProgressionsList = () => {
   const [progressionTitles, setProgressionTitles] = useState<string[]>([]);
-  const keyPrefix = "CAGED-";
+
+  const api = axios.create({
+    baseURL: "http://localhost:5108",
+  });
+
+  const getTitles = async () => {
+    try {
+      const response = await api.get("/progressions");
+      const titles = response.data.map((p: ProgressionType) => p.title);
+      setProgressionTitles(titles);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addTitle = async () => {
+    try {
+      const matches = await api.get(
+        `/progressions?title=${exampleProgression.title}`
+      );
+      if (matches.data.length === 0) {
+        const postResponse = await api.post(
+          "/progressions",
+          exampleProgression
+        );
+        console.log("post response", postResponse);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const title = exampleProgression.title;
-    const defaultProgression = JSON.stringify(exampleProgression);
-    if (!Object.keys(localStorage).some((key) => key.startsWith(keyPrefix))) {
-      localStorage.setItem(`${keyPrefix}${title}`, defaultProgression);
-    }
-
-    const strippedTitles: string[] = Object.keys(localStorage)
-      .filter((key) => key.startsWith(keyPrefix))
-      .map((key) => key.slice(keyPrefix.length));
-
-    setProgressionTitles(strippedTitles);
+    getTitles();
+    if (progressionTitles.length === 0) addTitle();
   }, []);
 
   const titleList = progressionTitles.map((title, index) => {
