@@ -16,10 +16,11 @@ function App() {
       <div className="content">
         <Routes>
           <Route index element={<HomePage />} />
-          <Route path="CAGED" element={<CAGEDInterface />} />
-          <Route path="Customize" element={<CustomInterface />} />
-          <Route path="Progressions" element={<ProgressionTemplate />} />
-          <Route path="Progressions/:userTitle" element={<Progression />} />
+          <Route path="caged" element={<CAGEDInterface />} />
+          <Route path="customize" element={<CustomInterface />} />
+          <Route path="progressions" element={<ProgressionTemplate />} />
+          <Route path="progressions/:userTitle" element={<Progression />} />
+          <Route path="progressions/*" element={<ProgressionTemplate />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </div>

@@ -109,6 +109,14 @@ a, .progressions {
   display: block;
 }
 
+.loading-message {
+  font-family: 'karla', sans-serif;
+  color: #E0DBD8;
+  font-weight: bold;
+  font-size: .8rem;
+  height: 1rem;
+}
+
 .progressions:hover, a:hover {
   color:#939199;
   cursor: pointer;
@@ -489,6 +497,7 @@ button:hover {
 
 .progression-list > li > a:hover {
   color: #F4CE14;
+
 }
 
 .fret-board {
@@ -691,7 +700,7 @@ button:hover {
     display: flex;
   }
 
-  .side-nav-list {
+  .side-nav-item {
   word-wrap: break-word;
   }
 

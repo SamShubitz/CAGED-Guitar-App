@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { ProgressionType } from "../types";
-import { getProgressions, postProgression } from "../uncaged-api";
+import { getProgressions } from "../uncaged-api";
 
 const exampleProgression: ProgressionType = {
   title: "Autumn Leaves",
@@ -66,50 +66,44 @@ const exampleProgression: ProgressionType = {
 };
 
 const ProgressionsList = () => {
-  const [progressionTitles, setProgressionTitles] = useState<string[]>([]);
-  const [listIsEmpty, setListIsEmpty] = useState(false);
+  const pQuery = useQuery({
+    queryKey: ["progressions"],
+    queryFn: getProgressions,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const progressions = await getProgressions();
-        const titles = progressions.map((p: ProgressionType) => p.title);
-
-        if (titles.length > 0) {
-          setProgressionTitles(titles);
-        } else {
-          setProgressionTitles([exampleProgression.title]);
-          setListIsEmpty(true);
-        }
-      } catch (error) {
-        console.error("Error fetching progressions:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const populateList = async () => {
-    try {
-      if (listIsEmpty) {
-        const status = await postProgression(exampleProgression);
-        return status;
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const defaultLink = () => {
+    const safeTitle = encodeURIComponent(exampleProgression.title);
+    return (
+      <Link to={`Progressions/${safeTitle}`} state={exampleProgression}>
+        {exampleProgression.title}
+      </Link>
+    );
   };
 
-  const titleList = progressionTitles.map((title, index) => {
-    const safeTitle = encodeURIComponent(title);
+  const savedTitles = pQuery.data?.map((p: ProgressionType) => {
+    const safeTitle = encodeURIComponent(p.title);
+    console.log(safeTitle);
     return (
-      <li className="side-nav-list" key={index} onClick={populateList}>
-        <Link to={`Progressions/${safeTitle}`}>{title}</Link>
+      <li key={p.ProgressionId}>
+        <Link to={`Progressions/${safeTitle}`}>{p.title}</Link>
       </li>
     );
   });
 
-  return <ul className="progression-list">{titleList}</ul>;
+  const titles = savedTitles
+    ? [...savedTitles, defaultLink()]
+    : [defaultLink()];
+
+  if (pQuery.isLoading)
+    return (
+      <div className="nav-list">
+        <p className="loading-message">Loading...</p>
+      </div>
+    );
+
+  if (pQuery.error)
+    return <p style={{ whiteSpace: "wrap" }}>Error: {pQuery.error.message}</p>;
+  return <ul className="progression-list">{titles}</ul>;
 };
 
 export default ProgressionsList;

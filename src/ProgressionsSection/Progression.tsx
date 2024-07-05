@@ -1,29 +1,20 @@
-import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import Fretboard from "../Common/Fretboard.tsx";
-import { ProgressionType } from "../types.ts";
+import { Chord, ProgressionType } from "../types";
 import { getProgressionByTitle } from "../uncaged-api";
 
 const Progression = () => {
-  const [currentProgression, setCurrentProgression] = useState<ProgressionType>(
-    { title: "", chordList: [] }
-  );
+  const { userTitle } = useParams();
+  const { state } = useLocation();
   const navigate = useNavigate();
-  const { encodedUserTitle } = useParams();
-  const userTitle = decodeURIComponent(encodedUserTitle ?? "");
+  const decodedTitle = decodeURIComponent(userTitle ?? "");
+  const { data, isPending, error } = useQuery({
+    queryKey: ["progressions", userTitle],
+    queryFn: () => getProgressionByTitle(decodedTitle),
+  });
 
-  useEffect(() => {
-    const getProgression = async () => {
-      try {
-        const progression = await getProgressionByTitle(userTitle);
-        setCurrentProgression(progression[0]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getProgression();
-  }, [userTitle]);
-
+  /*
   const handleDelete = () => {
     if (currentProgression) {
       const isConfirmed = window.confirm(
@@ -36,25 +27,38 @@ const Progression = () => {
     }
   };
 
-  const progressionChords =
-    currentProgression.chordList.length !== 0
-      ? currentProgression.chordList.map((chord, index) => (
-          <li key={index}>
-            <div className="chord-diagram">
-              <Fretboard chord={chord} />
-              {chord.barreIndicator && (
-                <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
-              )}
-            </div>
-            <p
-              className="progression-name-display"
-              style={{ marginRight: "1rem" }}
-            >
-              {chord.name}
-            </p>
-          </li>
-        ))
-      : [];
+
+*/
+  const currentProgression = data
+    ? data.find((p: ProgressionType) => p.title === userTitle) || state
+    : state;
+
+  const progressionChords = currentProgression
+    ? currentProgression.chordList.map((chord: Chord, index: number) => (
+        <li key={index}>
+          <div className="chord-diagram">
+            <Fretboard chord={chord} />
+            {chord.barreIndicator && (
+              <p className="barre-fret-indicator">{`${chord.barreIndicator}fr`}</p>
+            )}
+          </div>
+          <p
+            className="progression-name-display"
+            style={{ marginRight: "1rem" }}
+          >
+            {chord.name}
+          </p>
+        </li>
+      ))
+    : [];
+
+  if (isPending) {
+    return <div>Loading progression...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching progression: {error.message}</div>;
+  }
 
   return (
     <div className="progressions-page">
@@ -62,7 +66,7 @@ const Progression = () => {
         <button className="view-mode-button">Modify progression</button>
       </Link>
       {userTitle && (
-        <button className="view-mode-button" onClick={handleDelete}>
+        <button className="view-mode-button" /*onClick={handleDelete}*/>
           Delete progression
         </button>
       )}

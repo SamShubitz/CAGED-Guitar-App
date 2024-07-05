@@ -39,7 +39,7 @@ const Fretboard = ({
       ? (barreShapes[chord.barre] ?? []).includes(index) &&
         chord.barre !== chord.name
       : (barreShapes[chord.barre] ?? []).includes(index);
-    const isMuted = chord.mutedFrets.includes(index);
+    const isMuted = chord.mutedFrets?.includes(index);
     const className =
       index < 6 ? "open" : (index + 1) % 6 === 0 ? "last-string" : "fret";
 
