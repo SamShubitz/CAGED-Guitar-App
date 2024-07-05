@@ -1,23 +1,27 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Fretboard from "../Common/Fretboard.tsx";
 import { ProgressionType } from "../types.ts";
+import { getProgressionByTitle } from "../uncaged-api";
 
 const Progression = () => {
   const [currentProgression, setCurrentProgression] = useState<ProgressionType>(
     { title: "", chordList: [] }
   );
   const navigate = useNavigate();
-  const { userTitle } = useParams();
-  const keyPrefix = "CAGED-";
-  const decodedTitle = decodeURIComponent(`${keyPrefix}${userTitle}` ?? "");
+  const { encodedUserTitle } = useParams();
+  const userTitle = decodeURIComponent(encodedUserTitle ?? "");
 
   useEffect(() => {
-    const unparsedProgression = localStorage.getItem(decodedTitle);
-    if (unparsedProgression) {
-      const userProgression = JSON.parse(unparsedProgression);
-      setCurrentProgression(userProgression);
-    }
+    const getProgression = async () => {
+      try {
+        const progression = await getProgressionByTitle(userTitle);
+        setCurrentProgression(progression[0]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getProgression();
   }, [userTitle]);
 
   const handleDelete = () => {
@@ -26,8 +30,6 @@ const Progression = () => {
         "Are you sure you want to delete this progression?"
       );
       if (isConfirmed) {
-        const key = `${keyPrefix}${currentProgression.title}`;
-        localStorage.removeItem(key);
         setCurrentProgression({ title: "", chordList: [] });
         navigate("/Progressions");
       }

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ProgressionType } from "../types";
-import axios from "axios";
+import { getProgressions, postProgression } from "../uncaged-api";
 
 const exampleProgression: ProgressionType = {
   title: "Autumn Leaves",
@@ -67,47 +67,43 @@ const exampleProgression: ProgressionType = {
 
 const ProgressionsList = () => {
   const [progressionTitles, setProgressionTitles] = useState<string[]>([]);
-
-  const api = axios.create({
-    baseURL: "http://localhost:5108",
-  });
-
-  const getTitles = async () => {
-    try {
-      const response = await api.get("/progressions");
-      const titles = response.data.map((p: ProgressionType) => p.title);
-      setProgressionTitles(titles);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const addTitle = async () => {
-    try {
-      const matches = await api.get(
-        `/progressions?title=${exampleProgression.title}`
-      );
-      if (matches.data.length === 0) {
-        const postResponse = await api.post(
-          "/progressions",
-          exampleProgression
-        );
-        console.log("post response", postResponse);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [listIsEmpty, setListIsEmpty] = useState(false);
 
   useEffect(() => {
-    getTitles();
-    if (progressionTitles.length === 0) addTitle();
+    const fetchData = async () => {
+      try {
+        const progressions = await getProgressions();
+        const titles = progressions.map((p: ProgressionType) => p.title);
+
+        if (titles.length > 0) {
+          setProgressionTitles(titles);
+        } else {
+          setProgressionTitles([exampleProgression.title]);
+          setListIsEmpty(true);
+        }
+      } catch (error) {
+        console.error("Error fetching progressions:", error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  const populateList = async () => {
+    try {
+      if (listIsEmpty) {
+        const status = await postProgression(exampleProgression);
+        return status;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const titleList = progressionTitles.map((title, index) => {
     const safeTitle = encodeURIComponent(title);
     return (
-      <li className="side-nav-list" key={index}>
+      <li className="side-nav-list" key={index} onClick={populateList}>
         <Link to={`Progressions/${safeTitle}`}>{title}</Link>
       </li>
     );
