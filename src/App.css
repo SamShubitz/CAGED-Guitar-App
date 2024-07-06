@@ -109,19 +109,6 @@ a, .progressions {
   display: block;
 }
 
-.loading-message {
-  font-family: 'karla', sans-serif;
-  color: #E0DBD8;
-  font-weight: bold;
-  font-size: .8rem;
-  height: 1rem;
-}
-
-.content-side {
-  text-align: center;
-  margin-top: 6rem;
-}
-
 .progressions:hover, a:hover {
   color:#939199;
   cursor: pointer;
@@ -264,8 +251,6 @@ button:hover {
 
 .chord-list-container {
   width: 60%;
-  height: 4rem;
-  margin-bottom: 2rem;
 }
 
 .chord-list-header {
@@ -502,7 +487,6 @@ button:hover {
 
 .progression-list > li > a:hover {
   color: #F4CE14;
-
 }
 
 .fret-board {
@@ -705,7 +689,7 @@ button:hover {
     display: flex;
   }
 
-  .side-nav-item {
+  .side-nav-list {
   word-wrap: break-word;
   }
 
