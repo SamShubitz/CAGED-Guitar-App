@@ -20,7 +20,7 @@ export const postProgression = async (progression: ProgressionType) => {
   return response.status;
 };
 
-export const deleteProgression = async (progression: ProgressionType) => {
-  const response = await api.delete(`/progressions${progression.title}`);
+export const deleteProgression = async (id: number) => {
+  const response = await api.delete(`/progressions/${id}`);
   return response.status;
 };

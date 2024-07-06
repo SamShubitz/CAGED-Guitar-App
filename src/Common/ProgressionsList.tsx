@@ -82,7 +82,6 @@ const ProgressionsList = () => {
 
   const savedTitles = pQuery.data?.map((p: ProgressionType) => {
     const safeTitle = encodeURIComponent(p.title);
-    console.log(safeTitle);
     return (
       <li key={p.ProgressionId}>
         <Link to={`Progressions/${safeTitle}`}>{p.title}</Link>
