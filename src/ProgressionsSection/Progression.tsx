@@ -51,16 +51,12 @@ const Progression = () => {
   };
 
   if (!state && isPending) {
-    return (
-      <p className="loading-message content-side">Loading progression...</p>
-    );
+    return <p className="message">Loading progression...</p>;
   }
 
   if (error) {
     return (
-      <p className="loading-message content-side">
-        Error fetching progression: {error.message}
-      </p>
+      <p className="message">Error fetching progression: {error.message}</p>
     );
   }
 

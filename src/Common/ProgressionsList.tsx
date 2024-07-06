@@ -96,12 +96,16 @@ const ProgressionsList = () => {
   if (pQuery.isLoading)
     return (
       <div className="nav-list">
-        <p className="loading-message">Loading...</p>
+        <p className="loading">Loading...</p>
       </div>
     );
 
   if (pQuery.error)
-    return <p style={{ whiteSpace: "wrap" }}>Error: {pQuery.error.message}</p>;
+    return (
+      <p className="error" style={{ whiteSpace: "wrap" }}>
+        Error: {pQuery.error.message}
+      </p>
+    );
   return <ul className="progression-list">{titles}</ul>;
 };
 

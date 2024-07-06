@@ -114,6 +114,16 @@ a, .progressions {
   cursor: pointer;
 }
 
+.loading, .error {
+  font-size: .8rem;
+  margin-top: -1rem;
+}
+
+.message {
+  text-align: center;
+  margin-block: auto auto;
+}
+
 .nav-list {
   list-style: none;
   width: 8.4rem;
