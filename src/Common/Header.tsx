@@ -1,5 +1,5 @@
 import HamburgerIcon from "./HamburgerIcon";
-import SideNav from "./SideNav";
+import SideNav from "../SideNav";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 

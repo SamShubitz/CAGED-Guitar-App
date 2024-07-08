@@ -30,7 +30,7 @@ const ViewModeInterface = ({
       queryClient.invalidateQueries({ queryKey: ["progressions"] });
     },
     onError: (error) => {
-      console.error("Post mutation error:", error);
+      console.error("Error saving progression:", error);
     },
   });
 
@@ -40,7 +40,7 @@ const ViewModeInterface = ({
       queryClient.invalidateQueries({ queryKey: ["progressions"] });
     },
     onError: (error) => {
-      console.error("Post mutation error:", error);
+      console.error("Error updating progression:", error);
     },
   });
 
@@ -75,7 +75,6 @@ const ViewModeInterface = ({
       putMutation.mutate(userProgression);
     } else {
       postMutation.mutate(userProgression);
-      console.log("post", userProgression);
     }
 
     setChordList([]);

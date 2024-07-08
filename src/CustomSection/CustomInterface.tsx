@@ -27,6 +27,9 @@ const CustomInterface = () => {
 
   useEffect(() => {
     if (state) {
+      state.chordList.forEach((chord: Chord) => {
+        chord.id = undefined;
+      });
       const sentProgression = state.chordList;
       const sentTitle = state.title;
       setChordList(sentProgression);

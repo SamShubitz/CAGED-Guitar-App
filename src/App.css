@@ -154,6 +154,32 @@ a, .progressions {
   overflow: hidden;
 }
 
+.login-page {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  align-items: center;
+}
+
+.login-form > label {
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.login-form > label >input {
+  font-size: 1rem;
+  margin-left: .7rem;
+}
+
 .home-page {
   flex-grow: 1;
   background-color: #333b43;

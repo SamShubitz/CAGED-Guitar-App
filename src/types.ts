@@ -4,6 +4,7 @@ export interface Chord {
     mutedFrets: number[];
     barre: CustomBarre | CagedBarre;
     barreIndicator: string;
+    id?: number;
 }
 
 export interface CustomDiagramProps {

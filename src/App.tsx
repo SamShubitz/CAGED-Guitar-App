@@ -1,6 +1,7 @@
 import "./App.css";
 import Header from "./Common/Header";
-import SideNav from "./Common/SideNav";
+import SideNav from "./SideNav";
+import LoginPage from "./UserSection/LoginPage";
 import HomePage from "./CagedSection/HomePage";
 import CAGEDInterface from "./CagedSection/CAGEDInterface";
 import CustomInterface from "./CustomSection/CustomInterface";
@@ -16,6 +17,7 @@ function App() {
       <div className="content">
         <Routes>
           <Route index element={<HomePage />} />
+          <Route path="loginpage" element={<LoginPage />} />
           <Route path="caged" element={<CAGEDInterface />} />
           <Route path="customize" element={<CustomInterface />} />
           <Route path="progressions" element={<ProgressionTemplate />} />

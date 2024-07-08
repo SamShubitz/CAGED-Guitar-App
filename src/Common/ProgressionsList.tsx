@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ProgressionType } from "../types";
-import { getProgressions } from "../api/uncaged-api";
+import { getProgressionTitles } from "../api/uncaged-api";
 
 const exampleProgression: ProgressionType = {
   title: "Autumn Leaves",
@@ -67,8 +67,8 @@ const exampleProgression: ProgressionType = {
 
 const ProgressionsList = () => {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["progressions"],
-    queryFn: getProgressions,
+    queryKey: ["titles"],
+    queryFn: getProgressionTitles,
   });
 
   const defaultLink = () => {
@@ -82,11 +82,11 @@ const ProgressionsList = () => {
     );
   };
 
-  const savedTitles = data?.map((p: ProgressionType) => {
-    const safeTitle = encodeURIComponent(p.title);
+  const savedTitles = data?.map((title: string) => {
+    const safeTitle = encodeURIComponent(title);
     return (
-      <li key={p.progressionId}>
-        <Link to={`Progressions/${safeTitle}`}>{p.title}</Link>
+      <li key={title}>
+        <Link to={`Progressions/${safeTitle}`}>{title}</Link>
       </li>
     );
   });

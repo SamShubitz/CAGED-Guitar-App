@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ProgressionsList from "../Common/ProgressionsList";
-import Logo from "../assets/Logo.jpeg";
-import HamburgerIcon from "./HamburgerIcon";
+import ProgressionsList from "./Common/ProgressionsList";
+import Logo from "./assets/Logo.jpeg";
+import HamburgerIcon from "./Common/HamburgerIcon";
 
 const SideNav = ({ className = "side-nav", toggleMenu = () => {} }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +23,9 @@ const SideNav = ({ className = "side-nav", toggleMenu = () => {} }) => {
       <img className="logo" src={Logo} alt="logo" />
       <h1 className="nav-header">unCAGED</h1>
       <ul className="nav-list">
+        <li>
+          <Link to="/LoginPage">LOGIN / SIGN UP</Link>
+        </li>
         <li>
           <Link to="/">HOME</Link>
         </li>
