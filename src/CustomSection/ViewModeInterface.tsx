@@ -1,14 +1,49 @@
 import Fretboard from "../Common/Fretboard.tsx";
 import { ViewModeProps } from "../types.ts";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  getProgressionTitles,
+  postProgression,
+  putProgression,
+} from "../api/uncaged-api.tsx";
+import { ProgressionType } from "../types.ts";
 
 const ViewModeInterface = ({
   chordList,
   setChordList,
   progressionTitle,
   setProgressionTitle,
+  id,
   viewMode,
   setViewMode,
 }: ViewModeProps) => {
+  const queryClient = useQueryClient();
+
+  const { data } = useQuery({
+    queryKey: ["titles"],
+    queryFn: getProgressionTitles,
+  });
+
+  const postMutation = useMutation({
+    mutationFn: (p: ProgressionType) => postProgression(p),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["progressions"] });
+    },
+    onError: (error) => {
+      console.error("Post mutation error:", error);
+    },
+  });
+
+  const putMutation = useMutation({
+    mutationFn: (p: ProgressionType) => putProgression(p),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["progressions"] });
+    },
+    onError: (error) => {
+      console.error("Post mutation error:", error);
+    },
+  });
+
   const userProgression = chordList.map((chord, index) => (
     <li key={index}>
       <div className="custom-chord-diagram">
@@ -25,24 +60,30 @@ const ViewModeInterface = ({
     setViewMode(!viewMode);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    const userProgression = {
-      title: progressionTitle,
-      chordList: [...chordList],
-    };
+    const userProgression = id
+      ? {
+          title: progressionTitle,
+          chordList: [...chordList],
+          progressionId: id ? id : null,
+        }
+      : { title: progressionTitle, chordList: [...chordList] };
 
-    localStorage.setItem(
-      `CAGED-${userProgression.title}`,
-      JSON.stringify(userProgression)
-    );
+    if (data.includes(userProgression.title)) {
+      userProgression;
+      putMutation.mutate(userProgression);
+    } else {
+      postMutation.mutate(userProgression);
+      console.log("post", userProgression);
+    }
 
     setChordList([]);
     setProgressionTitle("");
     toggleViewMode();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     setProgressionTitle(e.target.value);
   };
 

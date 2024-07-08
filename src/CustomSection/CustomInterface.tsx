@@ -1,8 +1,8 @@
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Chord, CustomBarre, ClassNameType } from "../types.ts";
 import CustomChordDiagram from "./CustomChordDiagram.tsx";
 import ViewModeInterface from "./ViewModeInterface.tsx";
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 const CustomInterface = () => {
   const [chord, setChord] = useState<Chord>({
@@ -15,7 +15,7 @@ const CustomInterface = () => {
   const [chordList, setChordList] = useState<Chord[]>([]);
   const [viewMode, setViewMode] = useState<boolean>(false);
   const [progressionTitle, setProgressionTitle] = useState<string>("");
-  let { state } = useLocation();
+  const { state } = useLocation();
 
   const displayProgression = (
     chordList.length >= 12
@@ -48,7 +48,7 @@ const CustomInterface = () => {
     setChordList([...chordList.slice(0, chordList.length - 1)]);
   };
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelect = (e: any) => {
     const nextBarre = e.target.value as CustomBarre;
     setChord({ ...chord, barre: nextBarre });
   };
@@ -81,7 +81,7 @@ const CustomInterface = () => {
     setViewMode(!viewMode);
   };
 
-  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSave = (e: any) => {
     e.preventDefault();
     setChordList([...chordList, chord]);
     handleClear();
@@ -108,6 +108,7 @@ const CustomInterface = () => {
           chordList={chordList}
           setChordList={setChordList}
           progressionTitle={progressionTitle}
+          id={state?.progressionId}
           setProgressionTitle={setProgressionTitle}
           viewMode={viewMode}
           setViewMode={setViewMode}

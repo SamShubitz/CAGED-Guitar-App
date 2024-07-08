@@ -29,6 +29,7 @@ export interface ViewModeProps {
     setChordList: (chordList: Chord[]) => void;
     progressionTitle: string;
     setProgressionTitle: (title: string) => void;
+    id?: number;
     viewMode: boolean;
     setViewMode: (value: boolean) => void;
 }
@@ -59,7 +60,7 @@ export interface FretboardProps {
 }
 
 export interface ProgressionType {
-    ProgressionId?: number;
+    progressionId?: number | null;
     title: string;
     chordList: Chord[];
 }

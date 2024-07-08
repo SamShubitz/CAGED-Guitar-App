@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ProgressionType } from "./types";
+import { ProgressionType } from "../types";
 
 export const api = axios.create({
   baseURL: "http://localhost:5108",
@@ -15,8 +15,19 @@ export const getProgressionByTitle = async (title: string) => {
   return response.data;
 };
 
-export const postProgression = async (progression: ProgressionType) => {
-  const response = await api.post("/progressions", progression);
+export const getProgressionTitles = async () => {
+  const response = await api.get(`/progressions/titles`);
+  return response.data;
+};
+
+export const postProgression = async (p: ProgressionType) => {
+  const response = await api.post("/progressions", p);
+  return response.status;
+};
+
+export const putProgression = async (p: ProgressionType) => {
+  const id = p.progressionId;
+  const response = await api.put(`/progressions/${id}`, p);
   return response.status;
 };
 

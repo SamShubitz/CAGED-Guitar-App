@@ -1,23 +1,30 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import Fretboard from "../Common/Fretboard.tsx";
 import { Chord } from "../types";
-import { getProgressionByTitle, deleteProgression } from "../uncaged-api";
+import {
+  getProgressionByTitle,
+  deleteProgression,
+} from "../api/uncaged-api.tsx";
 
 const Progression = () => {
-  const { userTitle } = useParams();
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { userTitle } = useParams();
   const decodedTitle = decodeURIComponent(userTitle ?? "");
+  const queryClient = useQueryClient();
 
   const { data, isPending, error } = useQuery({
-    queryKey: ["progression", userTitle],
+    queryKey: ["progressions", userTitle],
     queryFn: () => getProgressionByTitle(decodedTitle),
     enabled: !state,
   });
 
   const mutation = useMutation({
     mutationFn: (progId: number) => deleteProgression(progId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["progressions"] });
+    },
   });
 
   const currentProgression = data ? data : state;

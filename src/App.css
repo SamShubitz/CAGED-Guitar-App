@@ -117,6 +117,7 @@ a, .progressions {
 .loading, .error {
   font-size: .8rem;
   margin-top: -1rem;
+  white-space: wrap;
 }
 
 .message {

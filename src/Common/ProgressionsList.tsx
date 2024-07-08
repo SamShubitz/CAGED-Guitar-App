@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ProgressionType } from "../types";
-import { getProgressions } from "../uncaged-api";
+import { getProgressions } from "../api/uncaged-api";
 
 const exampleProgression: ProgressionType = {
   title: "Autumn Leaves",
@@ -66,7 +66,7 @@ const exampleProgression: ProgressionType = {
 };
 
 const ProgressionsList = () => {
-  const pQuery = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ["progressions"],
     queryFn: getProgressions,
   });
@@ -74,16 +74,18 @@ const ProgressionsList = () => {
   const defaultLink = () => {
     const safeTitle = encodeURIComponent(exampleProgression.title);
     return (
-      <Link to={`Progressions/${safeTitle}`} state={exampleProgression}>
-        {exampleProgression.title}
-      </Link>
+      <li key={exampleProgression.title}>
+        <Link to={`Progressions/${safeTitle}`} state={exampleProgression}>
+          {exampleProgression.title}
+        </Link>
+      </li>
     );
   };
 
-  const savedTitles = pQuery.data?.map((p: ProgressionType) => {
+  const savedTitles = data?.map((p: ProgressionType) => {
     const safeTitle = encodeURIComponent(p.title);
     return (
-      <li key={p.ProgressionId}>
+      <li key={p.progressionId}>
         <Link to={`Progressions/${safeTitle}`}>{p.title}</Link>
       </li>
     );
@@ -93,18 +95,19 @@ const ProgressionsList = () => {
     ? [...savedTitles, defaultLink()]
     : [defaultLink()];
 
-  if (pQuery.isLoading)
+  if (isLoading)
     return (
       <div className="nav-list">
         <p className="loading">Loading...</p>
       </div>
     );
 
-  if (pQuery.error)
+  if (error)
     return (
-      <p className="error" style={{ whiteSpace: "wrap" }}>
-        Error: {pQuery.error.message}
-      </p>
+      <>
+        <p className="error">Error: {error.message}</p>
+        {titles}
+      </>
     );
   return <ul className="progression-list">{titles}</ul>;
 };
