@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import Fretboard from "../Common/Fretboard.tsx";
@@ -8,6 +9,7 @@ import {
 } from "../api/uncaged-api.tsx";
 
 const Progression = () => {
+  const [id, setId] = useState<Number>();
   const { state } = useLocation();
   const navigate = useNavigate();
   const { userTitle } = useParams();
@@ -16,7 +18,7 @@ const Progression = () => {
 
   const { data, isPending, error } = useQuery({
     queryKey: ["progressions", userTitle],
-    queryFn: () => getProgressionByTitle(decodedTitle, 1),
+    queryFn: () => getProgressionByTitle(decodedTitle, id as number),
     enabled: !state,
   });
 
@@ -26,6 +28,13 @@ const Progression = () => {
       queryClient.invalidateQueries({ queryKey: ["progressions"] });
     },
   });
+
+  useEffect(() => {
+    const userId = Number(localStorage.getItem("CAGED-id"));
+    if (userId) {
+      setId(userId);
+    }
+  }, []);
 
   const currentProgression = data ? data : state;
 

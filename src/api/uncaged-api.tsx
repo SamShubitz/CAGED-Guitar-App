@@ -21,13 +21,13 @@ export const getProgressionByTitle = async (title: string, id: number) => {
   return response.data;
 };
 
-export const getProgressionTitles = async () => {
-  const response = await api.get(`/progressions/titles`);
+export const getProgressionTitles = async (id: number) => {
+  const response = await api.get(`${id}/progressions/titles`);
   return response.data;
 };
 
-export const postProgression = async (p: ProgressionType) => {
-  const response = await api.post("/progressions", p);
+export const postProgression = async (p: ProgressionType, userId: number) => {
+  const response = await api.post(`${userId}/progressions`, p);
   return response.status;
 };
 

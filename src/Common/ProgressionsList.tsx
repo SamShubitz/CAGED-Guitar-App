@@ -67,17 +67,17 @@ const exampleProgression: ProgressionType = {
 };
 
 const ProgressionsList = () => {
-  const [email, setEmail] = useState("");
+  const [id, setId] = useState<Number>();
   const { data, error, isLoading } = useQuery({
     queryKey: ["titles"],
-    queryFn: getProgressionTitles,
-    enabled: email !== "",
+    queryFn: () => getProgressionTitles(id as number),
+    enabled: !!id,
   });
 
   useEffect(() => {
-    const userEmail = localStorage.getItem("CAGED-email");
-    if (userEmail) {
-      setEmail(userEmail);
+    const userId = Number(localStorage.getItem("CAGED-id"));
+    if (userId) {
+      setId(userId);
     }
   }, []);
 

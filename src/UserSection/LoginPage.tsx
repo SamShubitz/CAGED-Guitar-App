@@ -15,7 +15,7 @@ const LoginPage = () => {
   const postUserMutation = useMutation({
     mutationFn: (email: string) => postUser(email),
     onSuccess: (data) => {
-      localStorage.setItem("CAGED-id", JSON.stringify(data.id));
+      localStorage.setItem("CAGED-id", data.id);
     },
     onError: (error) => console.error("Error:", error),
   });
@@ -24,9 +24,10 @@ const LoginPage = () => {
     const token = credentialResponse.credential;
     const { email } = jwtDecode<User>(token as string);
     const emails = data.map((user: User) => user.email);
+
     if (emails.includes(email)) {
       const currentUser = data.find((user: User) => user.email === email);
-      localStorage.setItem("CAGED-id", JSON.stringify(currentUser.id));
+      localStorage.setItem("CAGED-id", currentUser.id);
       setSignedIn(true);
     } else {
       postUserMutation.mutate(email as string);

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Fretboard from "../Common/Fretboard.tsx";
 import { ViewModeProps } from "../types.ts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -17,15 +18,16 @@ const ViewModeInterface = ({
   viewMode,
   setViewMode,
 }: ViewModeProps) => {
+  const [userId, setUserId] = useState<number>();
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
     queryKey: ["titles"],
-    queryFn: getProgressionTitles,
+    queryFn: () => getProgressionTitles(userId as number),
   });
 
   const postMutation = useMutation({
-    mutationFn: (p: ProgressionType) => postProgression(p),
+    mutationFn: (p: ProgressionType) => postProgression(p, userId as number),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["progressions"] });
     },
@@ -44,6 +46,13 @@ const ViewModeInterface = ({
     },
   });
 
+  useEffect(() => {
+    const userId = Number(localStorage.getItem("CAGED-id"));
+    if (userId) {
+      setUserId(userId);
+    }
+  }, []);
+
   const userProgression = chordList.map((chord, index) => (
     <li key={index}>
       <div className="custom-chord-diagram">
@@ -61,6 +70,7 @@ const ViewModeInterface = ({
   };
 
   const handleSubmit = (e: any) => {
+    console.log(userId);
     e.preventDefault();
     const userProgression = id
       ? {
@@ -72,6 +82,7 @@ const ViewModeInterface = ({
 
     if (data.includes(userProgression.title)) {
       userProgression;
+      console.log(userProgression);
       putMutation.mutate(userProgression);
     } else {
       postMutation.mutate(userProgression);
