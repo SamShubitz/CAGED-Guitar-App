@@ -32,8 +32,7 @@ export const postProgression = async (p: ProgressionType, userId: number) => {
 };
 
 export const putProgression = async (p: ProgressionType) => {
-  const id = p.progressionId;
-  const response = await api.put(`/progressions/${id}`, p);
+  const response = await api.put(`/progressions/`, p);
   return response.status;
 };
 

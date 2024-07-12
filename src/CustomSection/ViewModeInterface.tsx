@@ -81,8 +81,6 @@ const ViewModeInterface = ({
       : { title: progressionTitle, chordList: [...chordList] };
 
     if (data.includes(userProgression.title)) {
-      userProgression;
-      console.log(userProgression);
       putMutation.mutate(userProgression);
     } else {
       postMutation.mutate(userProgression);
