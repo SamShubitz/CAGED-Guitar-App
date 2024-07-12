@@ -16,7 +16,7 @@ const Progression = () => {
 
   const { data, isPending, error } = useQuery({
     queryKey: ["progressions", userTitle],
-    queryFn: () => getProgressionByTitle(decodedTitle),
+    queryFn: () => getProgressionByTitle(decodedTitle, 1),
     enabled: !state,
   });
 

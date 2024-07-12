@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ProgressionType } from "../types";
@@ -66,10 +67,19 @@ const exampleProgression: ProgressionType = {
 };
 
 const ProgressionsList = () => {
+  const [email, setEmail] = useState("");
   const { data, error, isLoading } = useQuery({
     queryKey: ["titles"],
     queryFn: getProgressionTitles,
+    enabled: email !== "",
   });
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem("CAGED-email");
+    if (userEmail) {
+      setEmail(userEmail);
+    }
+  }, []);
 
   const defaultLink = () => {
     const safeTitle = encodeURIComponent(exampleProgression.title);

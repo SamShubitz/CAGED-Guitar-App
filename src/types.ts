@@ -60,6 +60,13 @@ export interface FretboardProps {
     ) => void;
 }
 
+export interface User {
+    email?: string;
+    name?: string;
+    id: number;
+    progressionList?: ProgressionType[];
+  };
+
 export interface ProgressionType {
     progressionId?: number | null;
     title: string;

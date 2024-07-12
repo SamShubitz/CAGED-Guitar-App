@@ -5,13 +5,19 @@ export const api = axios.create({
   baseURL: "http://localhost:5108",
 });
 
-export const getProgressions = async () => {
-  const response = await api.get("/progressions");
+export const getUsers = async () => {
+  const response = await api.get("/users");
   return response.data;
 };
 
-export const getProgressionByTitle = async (title: string) => {
-  const response = await api.get(`/progressions?title=${title}`);
+export const postUser = async (email: string) => {
+  const newUser = { email: email };
+  const response = await api.post("/users", newUser);
+  return response.data;
+};
+
+export const getProgressionByTitle = async (title: string, id: number) => {
+  const response = await api.get(`${id}/progressions?title=${title}`);
   return response.data;
 };
 
