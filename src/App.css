@@ -404,10 +404,16 @@ button:hover {
   width: 10rem;
 }
 
-.progressions-page > .view-mode-button:nth-child(2) {
+.delete {
   position: absolute;
   top: 4.5rem;
   left: 12.3rem;
+}
+
+.warn {
+  position: absolute;
+  top: 4.5rem;
+  left: 11.3rem;
 }
 
 .custom-button {

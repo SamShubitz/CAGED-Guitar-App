@@ -7,6 +7,7 @@ const Progression = () => {
   const [currentProgression, setCurrentProgression] = useState<ProgressionType>(
     { title: "", progression: [] }
   );
+  const [warning, setWarning] = useState(true);
   const navigate = useNavigate();
   const { userTitle } = useParams();
   const keyPrefix = "CAGED-";
@@ -22,17 +23,15 @@ const Progression = () => {
 
   const handleDelete = () => {
     if (currentProgression) {
-      const isConfirmed = window.confirm(
-        "Are you sure you want to delete this progression?"
-      );
-      if (isConfirmed) {
         const key = `${keyPrefix}${currentProgression.title}`;
         localStorage.removeItem(key);
         setCurrentProgression({ title: "", progression: [] });
+        setWarning(false);
         navigate("/Progressions");
       }
-    }
   };
+
+  const buttonProps = warning ? {class: "delete", text: "Delete progression", onclick: () => setWarning(false)} : {class: "warn", text: "Are you sure?", onclick: () => handleDelete()}
 
   const progressionChords =
     currentProgression.progression.length !== 0
@@ -60,8 +59,8 @@ const Progression = () => {
         <button className="view-mode-button">Modify progression</button>
       </Link>
       {userTitle && (
-        <button className="view-mode-button" onClick={handleDelete}>
-          Delete progression
+        <button className={`view-mode-button ${buttonProps.class}`} onClick={buttonProps.onclick}>
+          {buttonProps.text}
         </button>
       )}
       {currentProgression && (
